@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ESH.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+      Заказы
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Списко заказов</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                  
+                                    <th>#</th>
+                                    <th>Покупатель</th>
+                                    <th>Самма заказа</th>
+                                    <th>Статус</th>
+                                    <th>Дата создания</th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                    
+                                        <td># @item.NumberOrder</td>
+                                        <td>
+                                            @item.Costumer
+                                        </td>
+                                        <td>@item.Total</td>
+                                        <td> @item.StatusOrders.Name</td>
+                                        <td>@item.DateCreate</td>
+                                        <td>
+                                            <a class="btn btn-sm" href="@Url.Action("Details","Orders",new { id=item.id},null)">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        <td><a class="btn btn-sm">
+    <i class="fa fa-trash-o">
+
+    </i>
+</a></td>
+                                    </tr>
+                                }
+                      
+                              
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Покупатель</th>
+                                    <th>Самма заказа</th>
+                                    <th>Статус</th>
+                                    <th>Дата создания</th>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+          
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+<a class="btn btn-app">
+    <i class="fa fa-edit">Править</i>
+</a>

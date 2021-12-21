@@ -1,0 +1,3 @@
+error: unregistered merchant. IP: 217.118.90.161
+RESULT_CODE: 1001
+ip: 192.168.1.5

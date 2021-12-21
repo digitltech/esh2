@@ -1,0 +1,16 @@
+﻿@model ESH.Models.Category
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+@using (Html.BeginForm("Add", "Category", FormMethod.Post))
+{
+    <fieldset>
+        <p>
+            @Html.LabelFor(m=>m.Name,"Наименование")<br />
+            @Html.EditorFor(m=>m.Name)
+        </p>
+        <input type="submit" value="Сохранить" />
+    </fieldset>
+}

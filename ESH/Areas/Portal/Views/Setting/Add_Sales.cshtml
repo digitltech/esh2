@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Add_Sales";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<h2>Добавить общию скидку</h2>
+
+<section>
+    <div class=" row">
+        @using (Html.BeginForm("Add_Sales", "Setting", FormMethod.Post))
+        {
+            <div class=" col-md-3">
+                <select name="manufacture" id="manufacture">
+                    @foreach (var item in ViewBag.manufacture)
+                    {
+                        <option value="@item.id">@item.Name</option>
+                    }
+                 
+
+                </select>
+            </div>
+            <div class=" col-md-3">
+                <select name="catalogy" id="catalogy">
+                    @foreach (var item in ViewBag.catalogy)
+                    {
+                        <option value="@item.id">@item.Name</option>
+                    }
+
+
+                </select>
+            </div>
+            <div class=" col-md-3">
+                <select name="StockTypes" id="StockTypes">
+                    @foreach (var item in ViewBag.StockTypes)
+                    {
+                        <option value="@item.id">@item.Name</option>
+                    }
+
+
+                </select>
+            </div>
+            <input type="submit" value="OK" />
+        }
+
+    </div>
+</section>
+

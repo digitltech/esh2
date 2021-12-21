@@ -1,0 +1,383 @@
+﻿
+@{
+    ViewBag.Title = "Новый заказ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+<script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+<link href="~/Content/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+
+<section id="cart_items">
+    <div class="container">
+@using (Html.BeginForm("GetOrder", "Order", FormMethod.Post))
+{
+
+        <h2>ОФОРМЛЕНИЕ ЗАКАЗА</h2>
+        <hr />
+        <div class="checkout-options">
+            <h3>Данные покупателя</h3>
+   
+        </div><!--/checkout-options-->
+        <div class="register-req">
+            
+            <p>Укажите свои данные для того, чтобы мы могли связаться с вами для уточнения заказа</p>
+        <p  style="visibility: hidden;"><input id="develiry" name="develiry" value="@ViewBag.develiry" /></p>
+        </div><!--/register-req-->
+
+        <div class="shopper-informations">
+            <div class="row">
+           <div class="col-md-2">
+                  <label class="label_order">Ваше имя *</label>
+                    <label class="label_order">Телефон *</label>
+                    <label class="label_order">Электронная почта*</label>
+                     <label class="label_order">Город </label>
+                 
+                
+                </div>
+                <div class="col-sm-10">
+                    <div class="shopper-info">        
+       
+                            <input type="text" id="nameCostumer" name="nameCostumer" placeholder="ФИО" required>
+                            <input type="tel" id="telCostumer" name="telCostumer" placeholder="+7(___)___-__-__" required>
+                            <input type="email" id="emailCostumer" name="emailCostumer" placeholder="example@mail.ru" required>
+                              <input type="text" id="cityCostumer" name="cityCostumer" value="@ViewData["city"]">
+
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            
+            @if (ViewBag.develiry == "kurer")
+            {
+                <div class="row">
+                    <h3>Адрес доставки</h3>
+                    <div class="col-md-2">
+                  
+                        <label class="label_order">Адрес</label>
+                        <label class="label_order">Предпотчительное время доставки</label>
+
+
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="shopper-info">
+
+                          
+                            <input type="text" id="adresCostumer" name="adresCostumer" placeholder="улица, дом, кв">
+                            <input type="text" id="content1" name="content1" placeholder="с 18:00 до 22:00">
+
+
+
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            }
+            else if (ViewBag.develiry == "tk")
+            {
+                <div class="row">
+                    <h3>Адрес доставки</h3>
+                    <div class="col-md-2">
+                        <label class="label_order">Регион </label>
+                        <label class="label_order">Город </label>
+                        <label class="label_order">Адрес</label>
+                        <label class="label_order">Предпотчительное время доставки</label>
+
+
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="shopper-info">
+                            <input type="text" id="cityRegion" name="cityRegion" placeholder="регион">
+                            <input type="text" id="cityCostumer" name="cityCostumer" value="@ViewData["city"]">
+                            <input type="text" id="adresCostumer" name="adresCostumer" placeholder="улица, дом, кв">
+                            <input type="text" id="content1" name="content1" placeholder="с 18:00 до 22:00">
+
+
+
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            }
+           
+        </div>
+        <div class="review-payment">
+            <h2>Список покупок</h2>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Наименование</td>
+                        <td class="description"></td>
+                        <td class="price">Цена</td>
+                        <td class="quantity">Количество</td>
+                        <td class="total">Стоимость</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.CartItems)
+                    {
+                        <tr>
+                            <td class="cart_product">
+                                @foreach (var img in ViewBag.img)
+                                {
+                                    if (img.ProductId == item.Products.id)
+                                    {
+                                        if (img.in_first == true)
+                                        {
+                                            <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Products.Url }, null)'><img src="@img.path_img@img.img" height="80" /></a>
+                                        }
+
+                                    }
+                                }
+
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">@item.Products.Name</a></h4>
+                                <p>артикул: @item.Products.Article</p>
+                            </td>
+                            <td class="cart_price">
+                                <p>@string.Format("{0:#,#}", item.Products.Price) <i class="fa fa-rub" aria-hidden="true"></i></p>
+                            </td>
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button">
+                                    <a class="cart_quantity_up" href=""> + </a>
+                                    <input class="cart_quantity_input" type="text" name="quantity" value="@item.Count" autocomplete="off" size="2">
+                                    <a class="cart_quantity_down" href=""> - </a>
+                                </div>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">@string.Format("{0:#,#}", item.Products.Price) <i class="fa fa-rub" aria-hidden="true"></i></p>
+                            </td>
+                            <td class="cart_delete">
+
+                                <a class="cart_quantity_delete" data-id="@item.id" href=""><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <section id="do_action">
+            <div class="container">
+                <div class="heading">
+                    <h3>Способ оплаты</h3>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Оплата наличными </h3>
+                        <div class="chose_area">
+                            <ul class="user_option">
+
+                                <li>
+                                    <input type="radio" name="pay" value="money" checked="checked">
+                                    <label >Наличными курьеру или в пункте выдачи</label>
+                                </li>
+                                <hr />
+                                <li>
+                                    <input type="radio" name="pay" value="credit">
+                                    <label>Кредит в <a href="~/Home/Contact">магазине</a></label>
+                                </li>
+                                <hr />
+                                <li>
+                                    <input type="radio" name="pay" value="beznal">
+                                    <label>Безналичный банковский перевод(предпочтительнее для юр.лиц)</label>
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Онлайн на сайте</h3>
+                        <div class="chose_area" style="height: 180px;">
+                            <ul class="user_option">
+
+                                <li>
+                                    <input type="radio" name="pay" value="paycart" >
+                                    <label style="width: 90%;">Банковской картой @*<span style="color:red; float: right;">скидка 3%</span>*@ </label>
+                                </li>
+                                <hr />
+                                @if (ViewBag.CartTotal > 3000) {
+                                <li>
+                                    <input type="radio" name="pay" value="paycredit">
+                                    <label>Онлайн кредит</label>
+                                  
+                                </li>
+                                }
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    @if (ViewBag.develiry == "magaz")
+                    {
+                        <div class="col-sm-12">
+                            <h3>Укажите удобное время, когда Вы хотите забрать заказ. </h3>
+                            <div class="chose_area" style="height: 180px;">
+                                <ul class="user_option">
+
+                                    <li>
+                                        <div class="form-group">
+                                            <label>Укажите дату </label>
+                                          <div class="form-group">
+       
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="date" class="form-control pull-right" id="datepicker" name="date_develiry">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form g
+                                            <!-- /.input group -->
+                                        </div>
+                                    </li>
+     
+                                    <li>
+                                        <div class="form-group">
+                                            <label>Укажите время </label>
+                                            <div class="form-group">
+
+                                                <div class="input-group date">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="time" class="form-control pull-right" id="datepicker" name="time_develiry">
+                                                </div>
+                                                <!-- /.input group -->
+                                            </div>
+                                            <!-- /.form g
+                                      <!-- /.input group -->
+                                        </div>
+
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                    }
+                    <div class="col-sm-6">
+                        <div class="total_area">
+                            <ul>
+                                <li>Стоимость товаров  <span>@ViewBag.CartTotal  р.</span></li>
+                                <li>Стоимость доставка <span>@ViewBag.DeveliryPrice р. <input type="number" hidden="hidden" id="DeveliryPrice" name="DeveliryPrice" value="@ViewBag.DeveliryPrice"/></span> </li>
+
+                                <li>Итого <span>@(ViewBag.CartTotal+ViewBag.DeveliryPrice)  р.</span></li>
+                            </ul>
+
+                            <button type="submit" class="btn btn-default check_out"   >Оформить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/#do_action-->
+
+}
+
+    </div>
+</section>
+
+@*<script type="text/javascript">
+
+    $('#butorder').on('click', function (e) {
+            e.preventDefault();
+            var nameCostumer = document.getElementById('nameCostumer').name;
+            var data = nameCostumer
+         
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetOrder", "Order",null)',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+
+            
+        });
+</script>*@
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $(".select2").select2();
+
+    //Datemask dd/mm/yyyy
+    $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+    //Datemask2 mm/dd/yyyy
+    $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+    //Money Euro
+    $("[data-mask]").inputmask();
+
+    //Date range picker
+    $('#reservation').daterangepicker();
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+        {
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment()
+        },
+        function (start, end) {
+          $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+    );
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass: 'iradio_minimal-blue'
+    });
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass: 'iradio_minimal-red'
+    });
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass: 'iradio_flat-green'
+    });
+
+    //Colorpicker
+    $(".my-colorpicker1").colorpicker();
+    //color picker with addon
+    $(".my-colorpicker2").colorpicker();
+
+    //Timepicker
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+  });
+</script>

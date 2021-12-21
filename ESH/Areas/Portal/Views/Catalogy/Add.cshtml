@@ -1,0 +1,43 @@
+﻿@model ESH.Models.Product
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+    <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Добавить новый товар
+
+    </h1>
+
+</section>
+<!-- Main content -->
+<section class="content">
+
+    @using (Html.BeginForm())
+    {
+        <p>
+        <p>
+            @Html.LabelFor(m => m.Article, "Артикул")
+            @Html.EditorFor(m => m.Article, new { htmlAttributes = new { @class = "form-control " } })
+        </p>
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Name, "Наименование")
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control " } })
+        </p>
+        <p>
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.cat as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+        </p>
+
+        <p>
+            Комплектуется @Html.CheckBoxFor(model =>model.Complect)
+        </p>
+
+        <input type="submit" value="Отправить" />
+    }
+
+</section>
+<!-- /.content -->
+

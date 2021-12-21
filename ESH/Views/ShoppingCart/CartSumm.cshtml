@@ -1,0 +1,12 @@
+﻿<a href="@Url.Action("Index","ShoppingCart",null,null)" ><i class="fa fa-shopping-cart" style="padding-right:13px;"></i>  Корзина 
+    @if (ViewData["CartCount"] == null)
+    {
+        <span>пусто</span>
+            }
+    else
+    {
+        <span id="cart-status" class="badge">@ViewData["CartCount"]</span>
+        <span id="cart-summ"> @ViewData["CartSumm"]</span>
+    }
+ 
+    </a>

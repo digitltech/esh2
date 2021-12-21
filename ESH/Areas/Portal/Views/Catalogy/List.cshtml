@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ESH.Models.Product>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+    <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+     Каталог товаров
+        <small>Optional description</small>
+      
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Add","Catalogy",null,null)">Добавить новый</a></li>
+        <li><a href="@Url.Action("AddFromExcel","Catalogy",null,null)">Добавить из excel</a></li>
+        <li><a href="@Url.Action("ImportPrice","Catalogy",null,null)">Импорт прайса</a></li>
+        <li class="active">Here</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <table class="table">
+
+
+        <tr>
+            <td>Артикул </td>
+            <td>Артикул поставщика </td>
+            <td>Наименование </td>
+            <td> Описание </td>
+            <td>Цена </td>
+        </tr>
+        @foreach (var p in Model)
+        {
+
+            if (p.Ostatok<2)
+            {
+
+                <tr class="danger">
+
+                    <td>@Html.ActionLink(p.Article, "Details", new { id = p.id }, null) </td>
+                    <td>@p.ArticlePos</td>
+                    <td>@p.Name</td>
+                    <td>@p.Descriptions</td>
+                    <td>@p.Price</td>
+                    <td>@p.Ostatok</td>
+                    @*<td>@p.SkladTypes.Name</td>*@
+                </tr>
+            }
+            else
+            {
+                <tr class="success">
+
+                    <td>@Html.ActionLink(p.Article, "Details", new { id = p.id }, null) </td>
+                    <td>@p.ArticlePos</td>
+                    <td>@p.Name</td>
+                    <td>@p.Descriptions</td>
+                    <td>@p.Price</td>
+                    <td>@p.Ostatok</td>
+                    @*<td>@p.SkladTypes.Name</td>*@
+                </tr>
+            }
+          
+        }
+     
+
+    </table>
+</section>
+<!-- /.content -->
+
+

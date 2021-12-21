@@ -1,0 +1,49 @@
+﻿@model ESH.Models.Category
+@{
+    ViewBag.Title = "ImportPrice";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+<select class="form-control">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+</select>
+
+@using (Html.BeginForm("ImportPrice", "Catalogy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Raw(ViewBag.Error)
+    <span>Excel File </span><input type="file" name="excelfile" />
+    <br />
+
+
+    <select class="form-control" name="catalogy" id="catalogy">
+        @foreach (var item in ViewBag.cat)
+        {
+            <option value="@item.id">@item.Name</option>
+        }
+        
+  
+    </select>
+
+    <select class="form-control" name="manufacture" id="manufacture">
+        @foreach (var item in ViewBag.manufacture)
+        {
+            <option value="@item.id">@item.Name</option>
+        }
+
+
+    </select>
+    <select class="form-control" name="nacenka" id="nacenka">
+     @foreach (var price in ViewBag.price)
+     {
+         <option value="@price.Id">@price.Type</option>
+     }
+    </select>
+    <input type="checkbox" name="GetIndex" value="GetIndex" id="GetIndex" checked="checked" />
+
+    <input type="submit" value="Import" />
+
+}
+<a href="@Url.Action("List","Catalogy",null,null)">Назад</a>

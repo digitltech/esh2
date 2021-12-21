@@ -1,0 +1,70 @@
+﻿@model ESH.Models.Order
+@{
+    ViewBag.Title = "Оплата заказа ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string i = ViewBag.Result;
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            <h2 class="title text-center">Оплата заказа</h2>
+
+            @switch (i)
+            {
+                case "0":
+                    <p>@ViewBag.Message</p>
+                    <p>@ViewBag.errormessage</p>
+                    break;
+                case "tr":
+
+                    using (Html.BeginForm("PayOrder", "Order", new { guid = Model.Guet }, FormMethod.Post))
+                    {
+                        <div class="col-md-3">
+                            <table class="table table-striped text-center">
+
+                                <tr>
+                                    <td>Оплата заказа <span class="label label-success">@Model.NumberOrder</span> </td>
+                                </tr>
+                                <tr>
+                                    <td>Сумма заказа <span class="label label-success">@string.Format("{0:#,#}", Model.TotalSumm)</span> </td>
+                                </tr>
+                                <tr>
+                                    <td>Тип оплаты <span class="label label-success">@Model.PaymentTypes.Name</span> </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="~/images/2234_sberbank-image.jpg" width="150" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"> <input type="submit" value="Оплатить картой" class="btn btn-danger" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+
+                                        <a href="@Url.Action("OrderComplite", "Order" , new { guid = Model.Guet},null)" class="btn btn-success">Отмена</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                   
+
+
+                    }
+                    break;
+                case "OK":
+                    <p>Ваш заказ оплачен</p>
+                    break;
+            }
+
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+

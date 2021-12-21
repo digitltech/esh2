@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3E56918D-1533-4852-910A-675932483C12}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ESH</RootNamespace>
+    <AssemblyName>ESH</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fluentx, Version=3.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.3.0.8\lib\net461\Fluentx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fluentx.Mvc, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fluentx.Mvc.1.0.4\lib\Fluentx.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Mvc.Mailer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="reCAPTCHA.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reCAPTCH.MVC.1.0.1\lib\net45\reCAPTCHA.MVC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Portal\Controllers\CatalogyController.cs" />
+    <Compile Include="Areas\Portal\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Portal\Controllers\MainController.cs" />
+    <Compile Include="Areas\Portal\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Portal\Controllers\SettingController.cs" />
+    <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Core\Generator.cs" />
+    <Compile Include="Core\GetFromNetlabs.cs" />
+    <Compile Include="Core\Helper.cs" />
+    <Compile Include="Core\Translit.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701201128355_ESHConnect.cs" />
+    <Compile Include="Migrations\201701201128355_ESHConnect.Designer.cs">
+      <DependentUpon>201701201128355_ESHConnect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ESHDBModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\Stock.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Portal\style\css\AdminLTE.min.css" />
+    <Content Include="Areas\Portal\style\css\bootstrap.css" />
+    <Content Include="Areas\Portal\style\css\bootstrap.min.css" />
+    <Content Include="Areas\Portal\style\css\skin-black.min.css" />
+    <Content Include="Areas\Portal\style\css\skin-blue.min.css" />
+    <Content Include="Areas\Portal\style\js\app.js" />
+    <Content Include="Areas\Portal\style\js\app.min.js" />
+    <Content Include="Areas\Portal\style\js\bootstrap.js" />
+    <Content Include="Areas\Portal\style\js\bootstrap.min.js" />
+    <Content Include="Areas\Portal\style\js\jquery-3.1.1.js" />
+    <Content Include="Areas\Portal\Views\Orders\invoice-print.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\prettyPhoto.css" />
+    <Content Include="Content\css\price-range.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\banner.jpg" />
+    <Content Include="Content\img\button_credit3.png" />
+    <Content Include="Content\img\c05276363.png" />
+    <Content Include="Content\img\logonew.png" />
+    <Content Include="Content\img\logoStore.png" />
+    <Content Include="Content\img\logoStore1.png" />
+    <Content Include="Content\img\no.png" />
+    <Content Include="Content\img\note.png" />
+    <Content Include="Content\img\pc1.png" />
+    <Content Include="Content\img\pic.jpg" />
+    <Content Include="Content\img\rasprodaja.png" />
+    <Content Include="Content\img\rassrochka.png" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\calc.js" />
+    <Content Include="Content\js\city\jquery-1.7.2.min.js" />
+    <Content Include="Content\js\city\jquery-ui-1.8.21.custom.min.js" />
+    <Content Include="Content\js\city\json2.js" />
+    <Content Include="Content\js\contact.js" />
+    <Content Include="Content\js\gmaps.js" />
+    <Content Include="Content\js\html5shiv.js" />
+    <Content Include="Content\js\info.js" />
+    <Content Include="Content\js\jquery.etalage.min.js" />
+    <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\js\jquery.scrollUp.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\owl.carousel.js" />
+    <Content Include="Content\js\price-range.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\plugins\datepicker\datepicker3.css" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.az.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.da.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.de.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.el.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.es.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.et.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.he.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.id.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.is.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.it.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.no.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.th.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.ua.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="Content\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.js" />
+    <Content Include="Content\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\plugins\daterangepicker\moment.js" />
+    <Content Include="Content\plugins\daterangepicker\moment.min.js" />
+    <Content Include="Content\themes\accordion.css" />
+    <Content Include="Content\themes\all.css" />
+    <Content Include="Content\themes\autocomplete.css" />
+    <Content Include="Content\themes\base.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\button.css" />
+    <Content Include="Content\themes\core.css" />
+    <Content Include="Content\themes\datepicker.css" />
+    <Content Include="Content\themes\dialog.css" />
+    <Content Include="Content\themes\draggable.css" />
+    <Content Include="Content\themes\jquery-ui.css" />
+    <Content Include="Content\themes\jquery-ui.min.css" />
+    <Content Include="Content\themes\menu.css" />
+    <Content Include="Content\themes\progressbar.css" />
+    <Content Include="Content\themes\resizable.css" />
+    <Content Include="Content\themes\selectable.css" />
+    <Content Include="Content\themes\selectmenu.css" />
+    <Content Include="Content\themes\slider.css" />
+    <Content Include="Content\themes\sortable.css" />
+    <Content Include="Content\themes\spinner.css" />
+    <Content Include="Content\themes\tabs.css" />
+    <Content Include="Content\themes\theme.css" />
+    <Content Include="Content\themes\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1091ROA\370976052.jpg" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1171RBB\KAV.png" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1171ROB\cart.jpg" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941RBBFS\kis2d.png" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941RBC\kis3d.png" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941RBE\kis5d.png" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941ROB\Kaspersky-Internet-Security_cart.jpg" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941ROC\kis3d.png" />
+    <Content Include="Files\Images\Catalog\antivirus\KL1941ROE\kis5d.png" />
+    <Content Include="Files\Images\Catalog\klaviatury_mishi\A4-G7-600NX-3\A4TechG7-600NX-1.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\1457031\EN54548.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\1457672\EN52810.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\52643\EN57400.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\55422\BattleHawk White.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\56887\EN56887.png" />
+    <Content Include="Files\Images\Catalog\korpusa\57455\EN57455.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\57578\EN57578.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\57585\EN57585.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\57592\EN57400.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\58126\EN58126.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\58133\EN58126.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\6101058\86804_2254_draft_large.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN52117\EN52117.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN54623\EN57417.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN54722\EN54722.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN55293\EN55293.JPG" />
+    <Content Include="Files\Images\Catalog\korpusa\EN57332\EN57332.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN57400\EN57400.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\EN57417\EN57417.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\noimage.png" />
+    <Content Include="Files\Images\Catalog\korpusa\SP Winard 3010\350\SP Winard 3010.jpg" />
+    <Content Include="Files\Images\Catalog\korpusa\V2X Blue\EN52681.jpg" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S21C\c04699030.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S21C\c04699064.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S21C\c04699102.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S21C\c04699120.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S29C\c04699349.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S29C\c04699418.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F5S29C\c04699453.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F6W17A\c04818477.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F6W17A\c04818504.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F6W17A\c04818531.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F6W17A\c04818567.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\F6W17A\c04818675.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q36A\c05276363.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q36A\c05276485.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q36A\c05276640.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q36A\c05276710.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q62A\c05286724.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q62A\c05286793.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q62A\c05286868.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q62A\c05286951.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q62A\c05287182.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q63A\c05286895.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q63A\c05286979.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q63A\c05287045.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q63A\c05287126.png" />
+    <Content Include="Files\Images\Catalog\lasernie_printer\G3Q63A\c05287312.png" />
+    <Content Include="Files\Images\Catalog\Ofisnye_komputers\ofbas200\ofbas101.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05286724.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05286793.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05286868.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05286951.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05287099.png" />
+    <Content Include="Files\Images\Catalog\printers_lasernye\G3Q61A\c05287182.png" />
+    <Content Include="Files\noimage.png" />
+    <Content Include="Files\opisanie\C27F591FDI\ru-feature-curved-cf591--57127155.jpg" />
+    <Content Include="Files\opisanie\C27F591FDI\ru-feature-curved-cf591--57127157 %281%29.jpg" />
+    <Content Include="Files\opisanie\C27F591FDI\ru-feature-curved-cf591--57127161.jpg" />
+    <Content Include="Files\opisanie\C27F591FDI\ru-feature-curved-cf591--57127165.jpg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\0Ko6Wk4Fs4Tu2Xj6Kk9Pw.png" />
+    <Content Include="images\1455549257_logo-defender.png" />
+    <Content Include="images\2234_sberbank-image.jpg" />
+    <Content Include="images\a4tech.jpg" />
+    <Content Include="images\AerCool.png" />
+    <Content Include="images\AMD-Logo.png" />
+    <Content Include="images\aoc.png" />
+    <Content Include="images\apc-logo-vector-download.jpg" />
+    <Content Include="images\apple.jpg" />
+    <Content Include="images\aser.png" />
+    <Content Include="images\asus_logo.png" />
+    <Content Include="images\banner avto pokupok.jpg" />
+    <Content Include="images\BenQ-Logo.png" />
+    <Content Include="images\bumaga.jpg" />
+    <Content Include="images\button_credit.png" />
+    <Content Include="images\button_credit3.png" />
+    <Content Include="images\C27F591FDI — копия.jpg" />
+    <Content Include="images\C27F591FDI.jpg" />
+    <Content Include="images\camery.jpg" />
+    <Content Include="images\canon.png" />
+    <Content Include="images\canyon.png" />
+    <Content Include="images\D-Link_Logo.jpg" />
+    <Content Include="images\dell.jpg" />
+    <Content Include="images\epson.png" />
+    <Content Include="images\Genius.png" />
+    <Content Include="images\gigabyte.png" />
+    <Content Include="images\hp.jpeg" />
+    <Content Include="images\i3.png" />
+    <Content Include="images\i5.png" />
+    <Content Include="images\i7.png" />
+    <Content Include="images\ibp.jpg" />
+    <Content Include="images\intel.png" />
+    <Content Include="images\inwin.jpg" />
+    <Content Include="images\ippon logo.png" />
+    <Content Include="images\kart.png" />
+    <Content Include="images\Kingston_logo_200x200.jpg" />
+    <Content Include="images\klava.jpg" />
+    <Content Include="images\klava_mouse.jpg" />
+    <Content Include="images\kommutator.jpg" />
+    <Content Include="images\komp.jpg" />
+    <Content Include="images\komplekt.jpg" />
+    <Content Include="images\lenovo.png" />
+    <Content Include="images\LG_logo_%282015%29.png" />
+    <Content Include="images\logitech.png" />
+    <Content Include="images\logo-sven.png" />
+    <Content Include="images\logo_rs_%281%29.gif" />
+    <Content Include="images\moniblock.jpg" />
+    <Content Include="images\monitor.jpg" />
+    <Content Include="images\MSI_logo_for_share2017.png" />
+    <Content Include="images\NEC_logo.png" />
+    <Content Include="images\nout.jpg" />
+    <Content Include="images\no_foto.png" />
+    <Content Include="images\palit-logo.png" />
+    <Content Include="images\Philips_logo_new.png" />
+    <Content Include="images\Picture_cart_for_stipid.png" />
+    <Content Include="images\Planshet.jpg" />
+    <Content Include="images\pny.jpg" />
+    <Content Include="images\printers.jpg" />
+    <Content Include="images\rashodniki.jpg" />
+    <Content Include="images\router.jpg" />
+    <Content Include="images\s8.png" />
+    <Content Include="images\samsung-logo-191-1.jpg" />
+    <Content Include="images\sapphire.png" />
+    <Content Include="images\setilem.jpg" />
+    <Content Include="images\smartfon.jpg" />
+    <Content Include="images\sumki.jpg" />
+    <Content Include="images\Super-Power.jpg" />
+    <Content Include="images\ViewSonic_logo.png" />
+    <Content Include="images\visa_mastercard.png" />
+    <Content Include="images\Western Digital Corporation.png" />
+    <Content Include="images\win10.png" />
+    <Content Include="images\Win10logo.png" />
+    <Content Include="images\zoom.png" />
+    <Content Include="images\отп.png" />
+    <Content Include="js\app.js" />
+    <Content Include="js\app.min.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="Areas\Portal\Views\web.config" />
+    <Content Include="Areas\Portal\Views\Shared\_LayoutPortal_.cshtml" />
+    <Content Include="Areas\Portal\Views\Main\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\Add.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\List.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Category\Add.cshtml" />
+    <Content Include="Areas\Portal\Views\Category\Index.cshtml" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Portal\Views\Catalogy\PropertyProductAdd.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\ImportPrice.cshtml" />
+    <Content Include="Areas\Portal\Views\Shared\_LayoutPortal1.cshtml" />
+    <Content Include="Areas\Portal\Views\Shared\_LayoutPortal.cshtml" />
+    <Content Include="Areas\Portal\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Portal\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\AddFromExcel.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\Delete.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Portal\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\ProductSearch.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\Setting_GetOstatok_for_Netlab.cshtml" />
+    <Content Include="Areas\Portal\Views\Catalogy\FilterCategoryList.cshtml" />
+    <Content Include="Areas\Portal\Views\Setting\AddPriceDeveliry.cshtml" />
+    <Content Include="Areas\Portal\Views\Setting\Add_Sales.cshtml" />
+    <None Include="Properties\PublishProfiles\1.pubxml" />
+    <None Include="Properties\PublishProfiles\temp.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Opisanie.html" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="templates\NewOrderEmailToCostumer.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Stock.cshtml" />
+    <Content Include="Views\Products\Item.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Products\_ListCatalogy.cshtml" />
+    <Content Include="Views\Categories\Catalogy.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\CartSumm.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Fast.cshtml" />
+    <Content Include="Views\Order\OrderComplite.cshtml" />
+    <Content Include="Views\Categories\Filter.cshtml" />
+    <Content Include="Views\Home\Garantii.cshtml" />
+    <Content Include="Views\Home\Vozvrat.cshtml" />
+    <Content Include="Views\Order\PayOrder.cshtml" />
+    <Content Include="Views\Home\Credit.cshtml" />
+    <Content Include="Views\Home\Robots.cshtml" />
+    <Content Include="Views\Order\Paid.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Portal\Models\" />
+    <Folder Include="Files\Images\Catalog\Ofisnye_komputers\ofbas100\" />
+    <Folder Include="images\404\" />
+    <Folder Include="images\blog\" />
+    <Folder Include="images\cart\" />
+    <Folder Include="images\home\" />
+    <Folder Include="images\product-details\" />
+    <Folder Include="images\shop\" />
+    <Folder Include="ssl\" />
+    <Folder Include="TransactionTXT\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701201128355_ESHConnect.resx">
+      <DependentUpon>201701201128355_ESHConnect.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51147</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51147/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

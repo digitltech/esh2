@@ -1,0 +1,234 @@
+﻿@model PagedList.IPagedList<ESH.Models.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Каталог " + ViewBag.CategoryName.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@*<section id="advertisement">
+        <div class="container">
+            <img src="images/shop/advertisement.jpg" alt="" />
+        </div>
+    </section>*@
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Категории</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+
+
+
+                        @foreach (var item in ViewBag.cat)
+                        {
+                            if (item.ParentId == ViewBag.cat_parent)
+                            {
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#@item.URL">
+                                                
+                                                @item.Name
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="@item.URL" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+
+                                            <ul>
+                                                <li><a href="@Url.Action("Catalogy","Categories" , new { url=item.URL},null)">Весь каталог</a></li>
+                                                @foreach (var i in ViewBag.cat)
+                                                {
+                                                    if (i.ParentId == item.id)
+                                                    {
+                                                        <li><a href="@Url.Action("Catalogy","Categories" , new { url=i.URL},null)">@i.Name </a></li>
+                                                    }
+
+
+
+
+                                                }
+
+                                            </ul>
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+
+
+
+                    </div><!--/category-products-->
+
+                    <div class="brands_products">
+                        <!--brands_products-->
+                        <h2>Отбор</h2>
+                        @*<div class="brands-name">
+                            @using (Html.BeginForm("Filter", "Categories", FormMethod.Post))
+                            {
+                                <ul class="nav nav-pills nav-stacked">
+                                    @foreach (var propertytype in ViewBag.propertytype)
+                                    {
+                                        <li>
+                                            <p class="text-center">@propertytype.Name</p>
+                                            <select name="propertyvalue">
+                                                <option value="0">выбрать</option>
+                                                @foreach (var propertyValue in ViewBag.propertyValue)
+                                                  {
+                                                          if (propertyValue.PropertyTypesid == propertytype.id)
+                                                          {
+                                                        <option value="@propertyValue.id">@propertyValue.Name</option>
+                                                    }
+
+
+                                                }
+
+                                            </select>
+                                        </li>
+                                    }
+                                    
+                                </ul>
+                                <input type="hidden"  name="url" value="@ViewBag.url" />
+                                <input type="submit" class="btn btn-default otbor" value="Применить" />
+                            }
+
+                        </div>*@
+                    </div><!--/brands_products-->
+
+                    <script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
+
+                    <!-- VK Widget -->
+                    <div id="vk_groups"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Group("vk_groups", { mode: 3, width: "240" }, 77038020);
+                    </script>
+
+                    <div class="shipping text-center">
+                        <!--shipping-->
+
+                        <img src="~/images/Banner-Online-Credit-240x400-130321.gif" />
+                    </div><!--/shipping-->
+
+                </div>
+            </div>
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <!--features_items-->
+                    <h2 class="title text-center">Отбор по производителям</h2>
+                   
+                        @foreach (var manufacturer in ViewBag.Manufac)
+                        {
+                            <div class="col-sm-3" style="padding-bottom:10px; text-align:center;">
+                                <a href="@Url.Action("Catalogy","Categories",new { manufacturer = manufacturer.Manufacturers.id, url = ViewBag.url })" class="text-center"><img src="~/images/@manufacturer.Manufacturers.img" height="50" /></a>
+
+                            </div>
+                        }
+
+               
+        
+
+
+                </div><!--features_items-->
+       
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <!--features_items-->
+                    <h2 class="title text-center">Каталог @ViewBag.CategoryName.Name</h2>
+           <div style="padding:25PX; margin-bottom:8px;    border: 1px solid #696763;">
+               <p style="color:#696763;position:absolute">Сортировать :</p>
+               <a style="margin-left:150px; color:#696763" href="@Url.Action("Catalogy","Categories",new { sortcatalog =ViewData["NameSort"], manufacturer = ViewBag.manufacture, url = ViewBag.url })">наименование <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a>
+               <a style="margin-left:100px;color:#696763" href="@Url.Action("Catalogy","Categories",new { sortcatalog =ViewData["PriceSort"], manufacturer = ViewBag.manufacture, url = ViewBag.url })">цена <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a>
+
+           </div>
+                        @foreach (var item in Model)
+                        {
+
+
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <div style="height:50%; margin-bottom:15px">
+                                                <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Url }, null)'>
+
+
+
+                                                    @if (item.OneImg == true)
+                                                    {
+                                                        <img src="@item.Img" />
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (var img in ViewBag.img)
+                                                        {
+                                                            if (img.ProductId == item.id)
+                                                            {
+                                                                if (img.in_first == true)
+                                                                {
+                                                                    <img src="@img.path_img@img.img" />
+                                                                }
+
+                                                            }
+
+                                                        }
+
+                                                    }
+
+
+
+
+                                                </a>
+                                            </div>
+                                            <div style="height:20%">
+
+                                                <p>@item.Name</p>
+                                                <p style="color: grey; font-size: 10px;">@item.Descriptions</p>
+
+                                            </div>
+                                            <div style="">
+                                                <h2>@string.Format("{0:#,#}", item.Price) <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li>
+                                                <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Url }, null)'><i class="fa fa-bars" aria-hidden="true"></i>Описание</a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>Быстрый заказ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div><!--features_items-->
+                <p>Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</p>
+
+
+                @Html.PagedListPager(Model, page => Url.Action("Catalogy", new { page, url = ViewBag.url , manufacturer = ViewBag.manufacture}))
+            </div>
+        </div>
+    </div>
+</section>

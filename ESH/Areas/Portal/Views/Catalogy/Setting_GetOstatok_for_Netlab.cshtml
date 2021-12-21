@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Setting_GetOstatok_for_Netlab";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+<div class="row">
+@using (Html.BeginForm("Setting_GetOstatok_for_Netlab", "Catalogy", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-md-4">
+        <select class="form-control" name="catalogy" id="catalogy">
+            @foreach (var item in ViewBag.cat)
+            {
+                <option value="@item.id">@item.Name</option>
+            }
+
+
+        </select>
+        <select class="form-control" name="manufacturer" id="manufacturer">
+            @foreach (var item in ViewBag.manufacturer)
+            {
+                <option value="@item.id">@item.Name</option>
+            }
+
+
+        </select>
+    </div>
+    <input type="submit" value="Выполнить" />
+}
+</div>
+

@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "FilterCategoryList";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <form method="get">
+                <div class="col-md-4">
+                    <label class="control-label">Категории </label>
+                    <select class="form-control" name="category" id="category">
+                        <option value=""> </option>
+                        @foreach (var item in ViewBag.cat)
+                        {
+                            <option value="@item.id">@item.Name</option>
+                        }
+
+
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">Производитель </label>
+                    <select class="form-control" name="manufacture" id="manufacture">
+                        <option value=""> </option>
+                        @foreach (var item in ViewBag.man)
+                        {
+                            <option value="@item.id">@item.Name</option>
+                        }
+
+
+                    </select>
+                </div>
+              
+                <input type="submit" value="Принять" />
+                <a href="@Url.Action("Setting_GetOstatok_for_Netlab","Catalogy",null,null)" target="_blank" class="btn-default">Сверить данные</a>
+            </form>
+         
+</div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Артикул</td>
+                        <td>Картинка</td>
+                    
+                        <td>Наименование</td>
+                        <td>описание</td>
+                        <td>Цена</td>
+                        <td>Остаток</td>
+                        <td> </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.product != null)
+                    {
+
+                        foreach (var item in ViewBag.product)
+                        {
+                            <tr>
+                                <td>@item.ArticlePos</td>
+                                <td><a href="@Url.Action("Details", "Catalogy", new { id=item.id})" target="_blank">@item.Article</a> </td>
+                                @if (item.OneImg == true)
+                                {
+                                    <td><img src="@item.Img" height="50" width="50"  /></td>
+                                }
+                                else
+                                {
+                                    foreach (var img in ViewBag.img)
+                                    {
+                                        if (img.in_first == true && img.ProductId==item.id)
+                                        {
+                                            <td><img src="@img.path_img@img.img" height="50" width="50" /></td>
+                                        }
+                                    }
+
+                                }
+                         
+                                <td>@item.Name</td>
+                                <td>@item.Descriptions</td>
+                                <td>@item.Price</td>
+                                <td>@item.Ostatok</td>
+                                <td>В корзину</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            Укажите данные .....
+                        </tr>
+                    }
+               
+                </tbody>
+            </table>
+            
+        
+        </div>
+        </div>
+
+
+

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "AddPriceDeveliry";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+@using (Html.BeginForm("AddPriceDeveliry", "Setting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <span>Excel File </span><input type="file" name="excelfile" />
+    <input type="submit" value="Отправить" />
+
+}
+

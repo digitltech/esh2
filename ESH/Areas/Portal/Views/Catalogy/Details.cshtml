@@ -1,0 +1,364 @@
+﻿@model ESH.Models.Product
+@{
+   
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+<section class="content-header">
+    <h1>
+   Каталог товаров
+    </h1>
+ 
+</section>
+<!-- Main content -->
+<section class="content">
+    <a href="~/Products/Item?url=@Model.Url" class="btn btn-default" target="_blank">НА сайте</a>
+    <a href="@Url.Action("Delete","Catalogy",new { id=Model.id},null)" class="btn btn-default" >X</a>
+    @using (Html.BeginForm("AddPropertyFromXml", "Catalogy",FormMethod.Post))
+    {
+        <input type="submit" value="Добавить" />
+    }
+
+    <p><button id="addProper">Xml</button></p>
+    <p><button id="getNetlab">Сверить данные с базы</button></p>
+    @using (Html.BeginForm("DetailsSafeEdit", "Catalogy", FormMethod.Post))
+    {
+    <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">Основние</a></li>
+            <li><a href="#profile" data-toggle="tab">Настройки</a></li>
+            <li><a href="#img" data-toggle="tab">Изображение</a></li>
+            <li><a href="#property" data-toggle="tab">Характиристики</a></li>
+            <li><a href="#join" data-toggle="tab">Совместные товары</a></li>
+        </ul>
+
+    <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <div class="col-md-8">
+                    @Html.HiddenFor(m => m.id)
+                    <p>
+                        @Html.LabelFor(m => m.Article, "Артикул")<br />
+                        @Html.EditorFor(m => m.Article, new { htmlAttributes = new { @class = "form-control " } })
+                    </p>
+                    <p>
+                        @Html.LabelFor(m => m.ArticlePos, "Артикул поставшика")<br />
+                        @Html.EditorFor(m => m.ArticlePos, new { htmlAttributes = new { @class = "form-control " } })
+                    </p>
+                    <p>
+                        @Html.LabelFor(m => m.Name, "Наименование")<br />
+                        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control " } })
+                    </p>
+                    <p>
+                        @Html.LabelFor(m => m.Descriptions, "Описание")<br />
+                        @Html.TextAreaFor(m => m.Descriptions, new { @class = "form-control ", rows = "3" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(m => m.Full_Descriptions, "Полное описание")<br />
+                        @Html.TextAreaFor(m => m.Full_Descriptions, new { @class = "form-control ", rows = "5" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(m => m.Obzor, "Обзор")<br />
+                        @Html.TextAreaFor(m => m.Obzor, new { @class = "form-control ", rows = "5" })
+                    </p>
+               
+
+
+
+                </div>
+            </div>
+            <div class="tab-pane" id="profile">
+                <div class="col-md-8">
+                    <p>Каталог</p><br />
+                    <p>@Html.DropDownListFor(model => model.CategoryId, ViewBag.Cat as SelectList, new { @class = "form-control" })</p>
+                    <p>@Html.DropDownListFor(model => model.ManufacturerId, ViewBag.Manufacturers as SelectList, new { @class = "form-control" })</p>
+
+                    <p>@Html.DropDownListFor(model => model.PriceTypiesId, ViewBag.PriceType as SelectList, new { @class = "form-control" })</p>
+
+                    <div class="col-xs-4">
+                        @Html.LabelFor(m => m.Price, "Цена")<br />
+                        @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control " } })
+                    </div>
+
+                    <div class="col-xs-4">
+                        @Html.LabelFor(m => m.Price, "Цена оптовая")<br />
+                        @Html.EditorFor(m => m.PriceOpt, new { htmlAttributes = new { @class = "form-control " } })
+                    </div>
+
+
+                    <p><button id="genurl">Генирировать URL</button></p>
+
+                    <p> @Html.LabelFor(m => m.Url, "URL адрес")</p><br />
+                    <p>@Html.EditorFor(m => m.Url, new { htmlAttributes = new { @class = "form-control " } })</p>
+
+
+                    <p> @Html.LabelFor(m => m.MetaKey, "Meta ключ")</p><br />
+                    <p> @Html.EditorFor(m => m.MetaKey, new { htmlAttributes = new { @class = "form-control " } })</p>
+
+
+                    <p> @Html.LabelFor(m => m.MetaDescription, "Мета описание")</p><br />
+                    <p> @Html.EditorFor(m => m.MetaDescription, new { htmlAttributes = new { @class = "form-control " } })</p>
+                    <div class="col-md-4">
+                        <p>Тип остатков</p>
+                        <p>@Html.DropDownListFor(model => model.SkladTypesId, ViewBag.SkladType as SelectList, new { @class = "form-control" })</p>
+                    </div>
+                   
+                    <div class="col-xs-4">
+                        Остаток на складе
+                        @Html.EditorFor(m => m.Ostatok, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-3">
+                        Остаток в магазине <br />
+                        <input value="@ViewData["sklad"]" />
+                    </div>
+                    <div class="col-md-3">
+                        Поступление товара<br />
+                        <input type="number" name="sklad" id="sklad" value="0" />
+                    </div>
+                    <div class="col-md-3">
+                        <p>@Model.DateUpdate</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        Активен @Html.CheckBoxFor(m => m.Enaible)
+                    </div>
+
+                    <div class="col-md-3">
+                        Разрешить оплату онлайн @Html.CheckBoxFor(m => m.PaymentOnline)
+                    </div>
+                    <div class="col-md-3">
+                        Комплектуется @Html.CheckBoxFor(model => model.Complect)
+                    </div>
+                    <div class="col-md-6">
+                        <p>Тип акции</p><p>@ViewBag.Stock</p>
+                        <select name="stock" id="stock">
+                            <option id="0">Нет</option>
+                            <option id="1">Рассрочка</option>
+                            <option id="2">Низкая цена</option>
+                            <option id="3">Новинка</option>
+                            <option id="4">Хиты</option>
+                            <option id="5">Убрать</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+
+            <div class="tab-pane" id="img">
+                Одно изображение @Html.CheckBoxFor(m => m.OneImg)
+                <table>
+                    <tr>
+                        <td>
+                            <img src="@Model.Img" height="150" width="150" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.EditorFor(m => m.Img, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+
+                    @foreach (var img in ViewBag.img)
+                {
+                        <tr>
+                            <td>
+                                <img src="@img.path_img@img.img" height="150" width="150" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+
+                    }
+
+                </table>
+                <div>
+
+                    <input type="file" name="upload" id="uploadFile" /><br />
+                    <button id="submitimg">Загрузить</button>
+                    <button id="submitOneimg">Одно изображение</button>
+
+
+                </div>
+            </div>
+
+            <div class="tab-pane" id="property">
+                <table>
+                    <tr>
+                        <td>Наименование</td>
+                        <td>Значение</td>
+                    </tr>
+                    @foreach (var property in ViewBag.Property)
+                    {
+                        <tr>
+                            <td>@property.PropertyTypes.Name</td>
+
+                            @if (property.PropertyValues.id == 21)
+                    {
+                                <td>@property.Value</td>
+                            }
+                            else
+                            {
+                                <td>@property.PropertyValues.Name</td>
+                            }
+                        </tr>
+                    }
+                </table>
+                <a href="@Url.Action("PropertyProductAdd","Catalogy",new { productId = Model.id,catId=Model.CategoryId},null)">Добавить</a>
+            </div>
+            <div class="tab-pane" id="join">
+                <input type="text" name="name" id="search" />
+                <button id="btnsearch">Gjbcr</button>
+             
+                <div id="results"></div>
+            </div>
+        </div>
+        <p><input type="submit" value="Отправить" /></p>
+    }
+
+</section>
+
+<script type="text/javascript">
+    
+        $('#btnsearch').on('click',function (e) {
+            e.preventDefault();
+            var name = $('#search').val();
+            name=encodeURIComponent(name);
+            $('#results').load('@Url.Action("ProductSearch", "Catalogy")?name='+name)
+        });
+ 
+</script>
+
+<script type="text/javascript">
+    $('#addProper').on('click', function (e) {
+        $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AddPropertyFromXml", "Catalogy",new { id=Model.id})',
+                        contentType: false,
+                        processData: false,
+                        data: false,
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+
+
+
+        });
+</script>
+
+<script type="text/javascript">
+    $('#getNetlab').on('click', function (e) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetProductFromNetlab","Catalogy",new { idpost = Model.ArticlePos})',
+            contentType: false,
+            processData: false,
+            data: false,
+            success: function (result) {
+                alert(result);
+            },
+            error: function (xhr, status, p3) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    $('#genurl').on('click', function (e) {
+        $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetURL", "Catalogy",new { id=Model.id})',
+                        contentType: false,
+                        processData: false,
+                        data: false,
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+
+              
+           
+        });
+</script>
+    <script type="text/javascript">
+
+        $('#submitimg').on('click', function (e) {
+            e.preventDefault();
+            var files = document.getElementById('uploadFile').files;
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("UploadImg", "Catalogy",new { id=Model.id})',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+
+                } else {
+                    alert("Браузер не поддерживает загрузку файлов HTML5!");
+                }
+            }
+        });
+    </script>
+<script type="text/javascript">
+
+        $('#submitOneimg').on('click', function (e) {
+            e.preventDefault();
+            var files = document.getElementById('uploadFile').files;
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("UploadOneImg", "Catalogy",new { id=Model.id})',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            alert(result);
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+
+                } else {
+                    alert("Браузер не поддерживает загрузку файлов HTML5!");
+                }
+            }
+        });
+</script>

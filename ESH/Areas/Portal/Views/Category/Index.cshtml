@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ESH.Models.Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Portal/Views/Shared/_LayoutPortal.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    @item.Name
+}
+

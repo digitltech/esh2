@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Результат поиска";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+    <section>
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-sm-12 padding-right">
+                    <div class="features_items">
+                        <!--features_items-->
+                        <h2 class="title text-center">Результат поиска</h2>
+                        <div style="padding:25PX; margin-bottom:8px;    border: 1px solid #696763;">
+                            <p style="color:#696763;position:absolute">Сортировать :</p>
+                            <a style="margin-left:150px; color:#696763" href="@Url.Action("Catalogy","Categories",new { sortcatalog =ViewData["NameSort"], manufacturer = ViewBag.manufacture, url = ViewBag.url })">наименование <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a>
+                            <a style="margin-left:100px;color:#696763" href="@Url.Action("Catalogy","Categories",new { sortcatalog =ViewData["PriceSort"], manufacturer = ViewBag.manufacture, url = ViewBag.url })">цена <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a>
+
+                        </div>
+                        @foreach (var item in ViewBag.result)
+                        {
+
+
+                            <div class="col-sm-3">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <div style="height:50%; margin-bottom:15px">
+                                                <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Url }, null)'>
+
+
+
+                                                    @if (item.OneImg == true)
+                                                    {
+                                                        <img src="@item.Img" />
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (var img in ViewBag.img)
+                                                        {
+                                                            if (img.ProductId == item.id)
+                                                            {
+                                                                if (img.in_first == true)
+                                                                {
+                                                                    <img src="@img.path_img@img.img" />
+                                                                }
+
+                                                            }
+
+                                                        }
+
+                                                    }
+
+
+
+
+                                                </a>
+                                            </div>
+                                            <div style="height:20%">
+
+                                                <p>@item.Name</p>
+                                                <p style="color: grey; font-size: 10px;">@item.Descriptions</p>
+
+                                            </div>
+                                            <div style="">
+                                                <h2>@string.Format("{0:#,#}", item.Price) <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li>
+                                                <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Url }, null)'><i class="fa fa-bars" aria-hidden="true"></i>Описание</a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>Быстрый заказ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div><!--features_items-->
+                    </div>
+            </div>
+        </div>
+    </section>
+
+

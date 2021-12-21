@@ -1,0 +1,933 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="keywords" content="@ViewBag.Key" />
+    <meta name="author" content="Digital STORE">
+    <title>@ViewBag.Title | Digital STORE интернет магазин</title>
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/png">
+
+    <link href="~/Content/css/animate.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link href="~/Content/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="~/Content/css/price-range.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    @*<script src="~/Scripts/jquery-ui-1.12.1.js"></script>*@
+
+    <link href="~/Content/themes/base/datepicker.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head><!--/head-->
+<body>
+    <!--Для корзины-->
+    @*https://codepen.io/johndelatorre/pen/uGIno*@
+
+    <header id="header">
+        <!--header-->
+        <div class="header_top">
+            <!--header_top-->
+            <div class="container" style="padding-left:15px; padding-right:15px;">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li>
+
+                                    <script src="http://yastatic.net/jquery/2.1.1/jquery.min.js"></script>
+                                    <script type="text/javascript">
+                                        window.onload = function () {
+                                            jQuery("#user-city").text(ymaps.geolocation.city);
+                                        }
+                                    </script>
+                                    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+                                    <a href=" ">город: <div id="user-city"></div></a>
+                                </li>
+                              
+                               
+                               
+                
+                   
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li>
+                                    <a href="@Url.Action("About","Home",null,null)">Доставка и оплата</a>
+                                </li>
+                                <li><a href="@Url.Action("Credit","Home",null,null)">Кредит</a></li>
+                                <li><a href="@Url.Action("Garantii","Home",null,null)">Гарантия</a></li>
+                                <li><a href="@Url.Action("Contact","Home",null,null)">Магазины</a></li>
+                                    </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="http://vk.com/digitltech"><i class="fa fa-vk"></i></a></li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li><a href="~/Manager/Index"> <i class="fa fa-lock"></i>Добрый день  @User.Identity.Name </a></li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
+                                    if (User.IsInRole("Администратор"))
+                                    {
+                                        <li><a href="~/portal"><i class="fa fa-lock"></i> Портал </a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a href="~/Account/Login" style="text-decoration:none"><i class="fa fa-lock"></i> Вход</a></li>
+                                }
+
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header_top-->
+
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="logo pull-left">
+                            <a href="~/">
+                                <img src="~/Content/img/logoStore.png" width="280" />
+                                </a>
+                        </div>
+                   
+                    </div>
+                    <div class="col-sm-6">
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <div class="col-xs-9 site-head-search-input-wrap">
+                                <input type="search" class="input-big site-head-search-input ng-pristine ng-untouched ng-valid" name="name" placeholder="поиск среди более 5000 наименование товара" data-autocomplete-source='@Url.Action("AutocompleteSearch", "Home")' />
+                            </div>
+                      <div class="col-xs-3 site-head-search-btn-wrap">
+                          <input type="submit" class="btn-search" value="Найти" />
+                      </div>
+                                   
+                        }
+         
+                      
+                      
+                    </div>
+              
+                    <div class="col-md-3 site-head-phone-col ">
+                        <div class="site-head-cart">
+                            <div class="cart-mini">@{Html.RenderAction("CartSumm", "ShoppingCart");}</div>
+                        </div>
+                      
+                        <div class="cs-t-1 site-head-phone">+7 (8422) 72-62-93</div>
+                        <p style="margin-right:60px; font-size:12px;">обратный звонок</p>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container" style="background-color:#4b4f58;padding:15PX;height:51px">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                              
+                                <li class="dropdown">
+
+                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="komputer_tehnika"},null)">Компьютерная техника</a>
+                                    <ul role="menu" class="sub-menu mega-menu">
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Компьюторы в сборе</li>
+                                             
+
+                                                <img src="~/images/komp.jpg" />
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="igrovie_domashnie"},null)">Комьютеры для дома и игр</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="Ofisnye_komputers"},null)">Компьюторы для работы</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="komputers_firmenye"},null)">Брендовые сборки</a></li>
+                                            
+                                            </ul>
+
+                                            </li>
+                                       
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Комплектующие</li>
+                                                
+                                                <img src="~/images/komplekt.jpg" />
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="materinskie_platy" },null)">Материнские платы</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="proccesor" },null)">Процессоры</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="pamyat" },null)">Озу</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="djestkie_diski" },null)">Жесткие диски</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="videokarty"},null)">Видеокарты</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="korpusa"},null)">Корпуса</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="ohlazdenie"},null)">Системы охлаждения</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="provody"},null)">Приводы, кабели, переходники</a></li>
+                                            </ul>
+
+
+                                     
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Мониторы </li>
+                                                <img src="~/images/monitor.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { manufacturer=3,url="Monitory"},null)">Мониторы Samsung</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="Monitory"},null)">Мониторы Acer</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { manufacturer=22,url="Monitory"},null)">Мониторы DELL</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new {manufacturer=22, url="Monitory"},null)">Мониторы Philips</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new {manufacturer=23, url="Monitory"},null)">Мониторы ViewSonic</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { manufacturer=21,url="Monitory"},null)">Мониторы Nec</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="Monitory"},null)">Мониторы LG</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { manufacturer=19, url="Monitory"},null)">Мониторы Benq</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { manufacturer=38, url="Monitory"},null)">Мониторы AOC</a>
+                                                </li>
+
+                                            </ul>
+
+
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Клавиатуры и манипуляторы </li>
+                                                <img src="~/images/klava_mouse.jpg"/>                                            
+                                               
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="klaviatyru" },null)">Клавиатуры</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="mouse" },null)">Мыши</a></li>
+                                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="Djostiki" },null)">Геймпады рули</a></li>
+                                      
+                                            </ul>
+
+
+
+                                        </li>
+                                 
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Стабилизаторы и ИБП </li>
+                                                <img src="~/images/ibp.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="stabilizatory"},null)">Источники бесперебойного питания</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="stabilizatory" },null)">Стабилизаторы</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="stabilizatory" },null)">Сетевые фильтры</a>
+                                                </li>
+
+                                            </ul>
+
+
+
+                                        </li>
+
+                           
+                               
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="programmnoe_obespechinie"},null)">Софт<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="antivirus"},null)">Антивирусы</a></li>
+                                        <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="operacionnye_sistemy"},null)">Операционные системы</a></li>
+                                        <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="Офисные программы"},null)">Офисные программы</a></li>
+                                        <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="buhgalterskye_programmy"},null)">Бухгалтерские программы</a></li>
+                                        <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="grafika_dizain"},null)">Графика и дизаин</a></li>
+                                
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki_planshety"},null)">Ноутбуки и планшеты <i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu mega-menu">
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Ноутбуки</li>
+                                                <img src="~/images/nout.jpg" />
+                                               
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki",manufacturer=1},null)">Ноутбуки Lenovo</a></li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki",manufacturer=2},null)">Ноутбуки HP</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki",manufacturer=3},null)">Ноутбуки ACER</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki",manufacturer=4},null)">Ноутбуки Asus</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki",manufacturer=13},null)">Ноутбуки Dell</a>
+                                                </li>
+                                            </ul>
+
+
+                                           </li>
+
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Планшеты</li>
+                                                <img src="~/images/Planshet.jpg" />                                                
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="planshety",manufacturer=1},null)">Планшеты Lenovo</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="planshety",manufacturer=6},null)">Планшеты Samsung</a>
+                                                </li>
+                                             
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="planshety",manufacturer=4},null)">Планшеты Asus</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="planshety",manufacturer=16},null)">Планшеты Apple</a>
+                                                </li>
+                                            </ul>
+
+
+                                        </li>
+
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Монобоки</li>
+                                           
+                                                <img src="~/images/moniblock.jpg" />
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=1},null)">Ноутбуки Lenovo</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=2},null)">Ноутбуки HP</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=3},null)">Ноутбуки Acer</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=4},null)">Ноутбуки Asus</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=17},null)">Ноутбуки MSI</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=4},null)">Ноутбуки Asus</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=13},null)">Ноутбуки DEll</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="monobloki",manufacturer=16},null)">Ноутбуки Apple</a>
+                                                </li>
+                                            </ul>
+
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Смартфоны</li>                                                
+                                                <img src="~/images/smartfon.jpg" />
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="smartfony",manufacturer=1},null)">Смартфоны Lenovo</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="smartfony",manufacturer=14},null)">Смартфоны Apple</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="smartfony",manufacturer=6},null)">Смартфоны Samsung </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="smartfony",manufacturer=4},null)">Смартфоны Asus </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="smartfony"},null)">Телефоны</a>
+                                                </li>
+                                            </ul>
+
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Акссесуары</li>
+                                                
+                                                <img src="~/images/sumki.jpg" />
+                                             
+                                                <li>
+                                                    Карты памяти
+                                                </li>
+                                                <li>
+                                                    
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="akssesuary_noutbuk"},null)">Сумки</a>
+                                                </li>
+                                                <li>
+                                                    Переходники, зарядные устройства
+                                                </li>
+                                                <li>
+                                               Зашитные пленки
+                                                </li>
+                                                <li>
+                                                    Чехлы
+                                                </li>
+                                            </ul>
+
+
+                                        </li>
+                                        
+                                 
+                                     
+                                    
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="orgtehnika"},null)">Оргтехника<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu mega-menu">
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Принтеры и МФУ</li>
+                                               
+                                                <img src="~/images/printers.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="struinie_printer"},null)">Струйные Принтеры и МФУ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="lasernie_printer"},null)">Лазерные принтеры и МФУ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="printers_seria_PRO"},null)">Серии ПРО, фото принтеры</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="ploter"},null)">Плоттеры</a>
+                                                </li>
+                                              
+                                            
+                                            </ul>
+
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Расходные материалы</li>
+
+                                                <img src="~/images/rashodniki.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="cartridge_original"},null)">Картриджи оригинальные</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="cartridge_bion"},null)">Картриджи BION</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="cartridge_sovmest"},null)">Прочии совместимые картриджи</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="chernila_toner"},null)">Чернила, тоннеры</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="printer_kabel"},null)">Кабели, переходники</a>
+                                                </li>
+
+
+                                            </ul>
+
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Бумага</li>
+                                            
+                                                <img src="~/images/bumaga.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="bumaga_A4"},null)">Бумага офисная A4</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="bumaga_foto"},null)">Фотобумага для струйной печати</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="bumaga_A3"},null)">Рулонная бумага</a>
+                                                </li>
+                                              
+
+
+                                            </ul>
+
+
+                                        </li>
+
+                                   
+                              
+                                  
+                                 
+
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="setevoe_oborudovanie"},null)">Сетевое оборудование<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu1 mega-menu1">
+                                        <li class="mega-menu1-column">
+                                            <ul>
+                                                <li class="nav-header">Беспроводное оборудование</li>
+
+                                                <img src="~/images/router.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="routery"},null)">Роутеры</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="anteny_tochki"},null)">Антены точки доступа</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="shluzi"},null)">Шлюзы</a>
+                                                </li>
+                                        
+
+
+                                            </ul>
+                                    
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Коммутаторы</li>
+
+                                                <img src="~/images/kommutator.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="kommutatory_dlya_doma"},null)">Коммутаторы для дома и офиса </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="upravlayemye_kommetatory"},null)">Управляеме коммутаторы </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="shluzi"},null)">Принт-серверы</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="shluzi"},null)">Сетевые системы хранения данных</a>
+                                                </li>
+
+
+
+                                            </ul>
+
+                                        </li>
+                                        <li class="mega-menu-column">
+                                            <ul>
+                                                <li class="nav-header">Видеонаблюдение</li>
+
+                                                <img src="~/images/camery.jpg" />
+
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="kommutatory_dlya_doma"},null)">Камеры</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="upravlayemye_kommetatory"},null)">Видеосерверы и регистраторы</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="shluzi"},null)">Монтажное оборудование</a>
+                                                </li>
+                                           
+
+
+
+                                            </ul>
+
+                                        </li>
+                                 
+                                  
+
+
+                                    </ul>
+                                </li>
+                              
+                     
+                            </ul>
+                        </div>
+                    </div>
+              
+                </div>
+            </div>
+        </div><!--/header-bottom-->
+    </header><!--/header-->
+
+ @RenderBody()
+
+    <footer id="footer">
+        <!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="companyinfo">
+                            <h2><span>Digital</span> TECH</h2>
+                            <p>IT- решения для дома и бизнеса</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-2">
+                            <div class="video-gallery text-center">
+                                <img src="~/images/D-Link_Logo.jpg" width="110" />
+                                <p>Авторизовваный партнер</p>
+                               
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="video-gallery text-center">
+                                <img src="~/images/0Ko6Wk4Fs4Tu2Xj6Kk9Pw.png"width="90"  style="padding: 0 10px;" />
+                              
+
+                            </div>
+                        </div>
+                    
+                
+                      
+                      
+
+
+                  
+
+                  
+                     
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="address">
+                            <a href="@Url.Action("Contact","Home",null,null)">
+                                <img src="~/images/kart.png" width="150" />
+                                <p>Адреса наших магазинов</p>
+                            </a>
+                             </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Информация</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="@Url.Action("About","Home",null,null)">Доставка и оплата</a></li>
+                                <li><a href="@Url.Action("Garantii","Home",null,null)">Гарантии</a></li>
+                                <li><a href="@Url.Action("Vozvrat","Home",null,null)">Возврат</a></li>
+                                <li><a href="@Url.Action("Kakzakazat","Home",null,null)">Как заказать</a></li>
+                                <li><a href="@Url.Action("Credit","Home",null,null)">Кредит</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Категории</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="komputer_tehnika"},null)">Компьютеры</a></li>
+                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="noutbuki_planshety"},null)">Ноутбуки</a></li>
+                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="orgtehnika"},null)">Принтеры</a></li>
+                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="programmnoe_obespechinie"},null)">СОФТ</a></li>
+                                <li><a href="@Url.Action("Catalogy","Categories",
+                                                    new { url="setevoe_oborudovanie"},null)">Сетевое оборудование</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Покупателю</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Статус заказа</a></li>
+                                <li><a href="#">Регистрация</a></li>
+                                <li><a href="#">Оптовикам</a></li>
+                                <li><a href="#">Узнать о наличии</a></li>
+                                <li><a href="#">Притензия</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>О Магазине</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Как мы работаем</a></li>
+                                <li><a href='@Url.Action("Contact", "Home",null,null)'>Магазин</a></li>
+                                <li><a href="http://digitltech.ru">О Компании</a></li>
+                                <li><a href="#">Сотруднечество</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-sm-offset-1">
+                        <div class="single-widget">
+                            <h2>Digital Store</h2>
+                            <form action="#" class="searchform">
+                                <input type="text" placeholder="Ваш email" />
+                                <a href=""  class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></a>
+                                <p>укажите ваш email и Вы сможите получать новости о поступлении и о акциях</p>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left"> @DateTime.Now.Year Digital TECH групп.</p>
+                    <p class="pull-left">
+                        <!-- Yandex.Metrika informer -->
+                        <a href="https://metrika.yandex.ru/stat/?id=37838575&amp;from=informer"
+                           target="_blank" rel="nofollow">
+                            <img src="https://informer.yandex.ru/informer/37838575/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
+                                 style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="37838575" data-lang="ru" />
+                        </a>
+                        <!-- /Yandex.Metrika informer -->
+                    </p>
+                    <p class="pull-left">
+                        <!-- Rating@Mail.ru logo -->
+                        <a href="http://top.mail.ru/jump?from=2786343">
+                            <img src="//top-fwz1.mail.ru/counter?id=2786343;t=479;l=1"
+                                 style="border:0;" height="31" width="88" alt="Рейтинг@Mail.ru" />
+                        </a>
+                        <!-- //Rating@Mail.ru logo -->
+                    </p>
+                    <p class="pull-right">Работает на<span><a target="_blank" href="http://digitltech.ru">E-Shop</a></span></p>
+                </div>
+            </div>
+        </div>
+
+    </footer><!--/Footer-->
+    <!-- Rating@Mail.ru counter -->
+    <script type="text/javascript">
+var _tmr = window._tmr || (window._tmr = []);
+_tmr.push({id: "2786343", type: "pageView", start: (new Date()).getTime()});
+(function (d, w, id) {
+  if (d.getElementById(id)) return;
+  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
+  ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window, "topmailru-code");
+    </script><noscript>
+        <div>
+            <img src="//top-fwz1.mail.ru/counter?id=2786343;js=na" style="border:0;position:absolute;left:-9999px;" alt="" />
+        </div>
+    </noscript>
+    <!-- //Rating@Mail.ru counter -->
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter37838575 = new Ya.Metrika({
+                    id:37838575,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37838575" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+  
+
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.js"></script>
+    @*<script src="~/Content/js/jquery.scrollUp.min.js"></script>*@
+    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/price-range.js"></script>
+
+    <script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".add-to-cart").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+   
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text(data.CartCount);
+                        $('#cart-summ').text(data.CartTotal);
+                    });
+            }
+       
+        });
+    });
+    </script>
+    <!-- BEGIN JIVOSITE CODE {literal} -->
+    <script type='text/javascript'>
+(function(){ var widget_id = 'KZu0wBCV64';var d=document;var w=window;function l(){
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+    <!-- {/literal} END JIVOSITE CODE -->
+
+    <script type="text/javascript">
+    $(function () {
+        $("[data-autocomplete-source]").each(function () {
+            var target = $(this);
+            target.autocomplete({ source: target.attr("data-autocomplete-source") });
+        });
+    });
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+        $(function () {
+            if (!Modernizr.inputtypes.date) {
+                $(function () {
+                    $("input[type='date']")
+                                .datepicker({ dateFormat: 'dd/mm/yy' })
+                                .get(0).setAttribute("type", "text");
+                })
+            }
+        });
+</script>

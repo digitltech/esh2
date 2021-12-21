@@ -1,0 +1,215 @@
+﻿@model ESH.ViewModel.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Корзина покупателя";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ 
+}
+
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".addcart").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text(data.CartCount);
+                        $('#cart-summ').text(data.CartTotal);
+
+
+                    });
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".RemoveLink").click(function () {
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                $.post("/ShoppingCart/RemoveFromCart",{"id":recordToDelete},
+                    function (data) {
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeIn('show');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text(data.CartCount);
+                    })
+            }
+        })
+    })
+</script>
+@if (Model.CartItems.Count > 0)
+            {
+                using (Html.BeginForm("GetDeveliry", "ShoppingCart", FormMethod.Post))
+                    {
+    <section id = "cart_items" >
+
+
+         <div class="container">
+            <div class="table-responsive cart_info">
+                <div id="update-message">
+                </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Наименование</td>
+                            <td class="description"></td>
+                            <td class="price">Цена</td>
+                            <td class="quantity">Количество</td>
+                            <td class="total">Стоимость</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.CartItems)
+                        {
+                       
+                            <tr>
+                                <td class="cart_product">
+                                    @if (item.Products.OneImg == true)
+                                    {
+                                    <a href='@Url.Action("Item", "Products",
+                                                new { url = item.Products.Url }, null)'><img src="@item.Products.Img" height="80" /></a>
+                                    }
+                                    else
+                                    {
+                                        foreach (var img in ViewBag.img)
+                                        {
+                                            if (img.ProductId == item.Products.id)
+                                            {
+                                                if (img.in_first == true)
+                                                {
+                                                    <a href='@Url.Action("Item", "Products",
+                                                new { url = item.Products.Url }, null)'><img src="@img.path_img@img.img" height="80" /></a>
+                                                }
+
+                                            }
+                                        }
+                                    }
+  
+                                    
+                                </td>
+                                <td class="cart_description" style="width:50%;">
+                                    <h4><a href='@Url.Action("Item", "Products",
+                                                new { url = item.Products.Url }, null)'>@item.Products.Name</a></h4>
+                                    <p>артикул: @item.Products.Article</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@string.Format("{0:#,#}", item.Products.Price) <i class="fa fa-rub" aria-hidden="true"></i></p>
+                                </td>
+                                <td class="cart_quantity" style="width:11%;">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up addcart" data-id="@item.ProductId" href="#"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@item.Count" id="item-count-@item.ProductId" autocomplete="off" size="2">
+                                        <a class="cart_quantity_down RemoveLink" href="#" 
+                                   data-id="@item.ProductId"> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total" style="width:10%;">
+                                    <p class="cart_total_price">@string.Format("{0:#,#}", item.Count*item.Products.Price) <i class="fa fa-rub" aria-hidden="true"></i></p>
+                                </td>
+                                <td class="cart_delete">
+                                 
+                                    <a class="RemoveLink"  data-id="@item.ProductId" href="#"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+                       
+                  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>Способ получения заказа</h3>
+      
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="chose_area">
+                     
+                        <ul class="user_option">
+                            <li style="padding:15px 0;">
+
+                                <label style="padding:0 25px">Город</label>
+
+
+                                <select style="width:50%;margin-left:140px;" id="city" name="city">
+                                    @foreach (var item in ViewBag.develiry)
+                                    {
+                                        <option id="@item.Id" >@item.City</option>
+                                    }
+                                
+                                </select>
+                            </li>
+                         
+                            <li style="padding:15px;">
+                                <label>Самовывоз из пункта выдачи</label>
+                                <input type="radio" style="width:100px;" name="develiry" id="develiry" value="magaz" data-toggle="tooltip" data-placement="left" title="Заказы Вы можите забрать в любое удобное для вас время в нашем пункет выдачи">
+                              
+                                
+                            </li>
+                         
+                            <li style="padding:15PX">
+                                <label>Курьерская доставка на дом</label>
+                                <input type="radio" style="width:100px;margin-left:6px;" name="develiry" id="develiry" value="kurer"  data-toggle="tooltip" data-placement="left" title="Доставка по городу и области, а также в пределах ПФО. Стоимость доставки расчитывается при оформлении заказа ">
+                      
+                               
+                            </li>  
+                            
+                        </ul>
+              
+                    
+ 
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Стоимость товаров в корзине  <span id="cartTotal">@Model.CartTotal р.</span></li>
+                       
+                        </ul>
+                     
+                        <input class="btn btn-default check_out" value="ОФОРМИТЬ ЗАКАЗ" type="submit"  >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#do_action-->
+    }
+}
+
+else
+{
+    <section id="cart_items">
+        <div class="container">
+        <h4>Ваша корзина пуста </h4>
+        </div>
+    </section>
+
+}
+
+@*<script type="text/javascript">
+    $(function () {
+        var develiry = $("#develiry"),
+            CartTotal = $("#cartTotal"),
+            CartSum = $("#CartSum");
+        develiry.change(function () {
+            var del = parseInt(develiry.val());
+            if (del == "kurer") {
+                CartSum.text(CartTotal + 350);
+            }
+        })
+    });
+</script>*@

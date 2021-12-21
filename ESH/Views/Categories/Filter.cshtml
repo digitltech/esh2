@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Категории</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+
+
+
+                        @foreach (var item in ViewBag.cat)
+                        {
+                            if (item.ParentId == ViewBag.cat_parent)
+                            {
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#@item.URL">
+                                                <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                @item.Name
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="@item.URL" class="panel-collapse collapse">
+                                        <div class="panel-body">
+
+
+                                            <ul>
+                                                <li><a href="@Url.Action("Catalogy","Categories" , new { url=item.URL},null)">Весь каталог</a></li>
+                                                @foreach (var i in ViewBag.cat)
+                                                {
+                                                    if (i.ParentId == item.id)
+                                                    {
+                                                        <li><a href="@Url.Action("Catalogy","Categories" , new { url=i.URL},null)">@i.Name </a></li>
+                                                    }
+
+
+
+
+                                                }
+
+                                            </ul>
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+
+
+
+                    </div><!--/category-products-->
+
+  
+
+                    <script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
+
+                    <!-- VK Widget -->
+                    <div id="vk_groups"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Group("vk_groups", { mode: 3, width: "220" }, 77038020);
+                    </script>
+
+                    <div class="shipping text-center">
+                        <!--shipping-->
+                        @*<img src="images/home/shipping.jpg" alt="" />*@
+                    </div><!--/shipping-->
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <!--features_items-->
+                    <h2 class="title text-center">Результат отбора</h2>
+                    @foreach (var item in ViewBag.property)
+                    {
+
+
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <div style="height:50%; margin-bottom:15px">
+                                            <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Products.Url }, null)'>
+                                                @foreach (var img in ViewBag.img)
+                                                {
+                                                    if (img.ProductId == item.Products.id)
+                                                    {
+                                                        if (img.in_first == true)
+                                                        {
+                                                            <img src="@img.path_img@img.img" />
+                                                        }
+                                                    }
+                                                }
+
+                                            </a>
+                                        </div>
+                                        <div style="height:20%">
+
+                                            <p>@item.Products.Name</p>
+                                            <p style="color: grey; font-size: 10px;">@item.Products.Descriptions</p>
+
+                                        </div>
+                                        <div style="">
+                                            <h2>@string.Format("{0:#,#}", item.Products.Price) <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li>
+                                            <a href='@Url.Action("Item", "Products",
+                                        new { url = item.Products.Url }, null)'><i class="fa fa-bars" aria-hidden="true"></i>Описание</a>
+                                        </li>
+                                        <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>Быстрый заказ</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+            
+                </div><!--features_items-->
+            </div>
+        </div>
+    </div>
+</section>

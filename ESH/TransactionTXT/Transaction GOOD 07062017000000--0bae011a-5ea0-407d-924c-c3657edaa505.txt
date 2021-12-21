@@ -1,0 +1,439 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Безопасность платежа обеспечивается банком "Русский Стандарт"</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="template/9295108294/css/main.css">
+     <script type="text/javascript">
+<!--
+strLocale_loc = new Object();
+strLocale_loc.enter_cvc = 'Введите CVC2/CVV2 или CID код';
+strLocale_loc.enter_cid = 'Введите CID код Amex';
+strLocale_loc.enter_cvc2 = 'Введите CVC2/CVV2 код';
+strLocale_loc.enter_pin = 'Enter PIN code';
+strLocale_loc.enter_name = 'Введите имя и фамилию держателя карты';
+strLocale_loc.enter_cardnr = 'Введите номер карты'
+strLocale_loc.enter_expiry = 'Введите срок действия карты';
+strLocale_loc.cvc2_label = 'CVC2/CVV2';
+strLocale_loc.pin_label = 'PIN';
+if (typeof(window['strLocale']) != 'undefined') {
+  strLocale_loc = strLocale;
+}
+function isNumeric(str){
+  for (i = 0; i < str.length; ++i) {
+    if ((str.charAt(i) < '0' || str.charAt(i) > '9') && str.charAt(i) != '*')
+       return false;
+  }
+  return true;
+}
+function isCvc2Incapable(cardnr) {
+    var re = new RegExp('$^');
+    if (cardnr && cardnr.match(re))
+        return true;
+    else
+        return false;
+}
+function isAMEX(str){
+  if (str.length < 2) {return false;}
+  if (str.charAt(0) == '3'){
+    if (str.charAt(1) == '4' || str.charAt(1) == '7')
+       return true;
+  }
+  return false;
+}
+function cvcCheck(str, cnum){
+  var enable_cvc2_incapable_cards = false;
+  if (!isNumeric(str)){
+     if (enable_cvc2_incapable_cards && isCvc2Incapable(cnum))
+         alert(strLocale_loc.enter_pin);
+     else
+         alert(strLocale_loc.enter_cvc);
+     return false;
+  }
+  if (enable_cvc2_incapable_cards && isCvc2Incapable(cnum)) {
+     if (str.length < 4) {
+       alert(strLocale_loc.enter_pin);
+     } else
+       return true;
+  } else if (isAMEX(cnum)){
+     if (str.length == 4){
+        return true;
+     } else {
+        alert(strLocale_loc.enter_cid);
+        return false;
+     }
+  } else {
+    if (str.length == 3) {
+        return true;
+     } else {
+        alert(strLocale_loc.enter_cvc2);
+        return false;
+     }
+  }
+}
+function FormValidator(form) {
+    // HTML formas validacija 
+    if (form.cardname.value == '') { 
+    alert(strLocale_loc.enter_name); 
+    form.cardname.focus();
+    return (false); 
+    } 
+    if (form.cardnr.value.length < 13 || !isNumeric(form.cardnr.value)) { 
+    alert(strLocale_loc.enter_cardnr); 
+    form.cardnr.focus();
+    return (false); 
+    } 
+    vm = form.validMONTH.value;
+    if (vm.length != 2 || (vm!='01'&&vm!='02'&&vm!='03'&&vm!='04'&&vm!='05'&&vm!='06'&&vm!='07'&&vm!='08'&&vm!='09'&&vm!='10'&&vm!='11'&&vm!='12'&&vm!='99')) { 
+    alert(strLocale_loc.enter_expiry); 
+    form.validMONTH.focus();
+    return (false); 
+    } 
+    if (form.validYEAR.value.length != 2 || !isNumeric(form.validYEAR.value)) { 
+    alert(strLocale_loc.enter_expiry); 
+    form.validYEAR.focus();
+    return (false); 
+    } 
+    if (!cvcCheck(form.cvc2.value, form.cardnr.value)){
+    form.cvc2.focus();
+    return (false); 
+    } 
+  return (true); 
+}
+function on_cardnr_keyup() {
+    var cardnr = document.getElementById('cardnr');
+    var cvc2_label = document.getElementById('cvc2_label');
+    if (!cvc2_label)
+        return;
+    if (isCvc2Incapable(cardnr.value)) {
+        cvc2_label.innerHTML = strLocale_loc['pin_label'];
+    } else {
+        cvc2_label.innerHTML = strLocale_loc['cvc2_label'];
+    }
+}
+function get_form(n) {
+    if(n<100){
+        var form = document.getElementById("cardentry");
+        if (form == null){
+            n++
+            setTimeout("get_form("+n+")",100);
+        } else {
+            form.setAttribute("onSubmit","return FormValidator(this)");
+        }
+    }
+}
+get_form(0)
+//-->
+</script>
+
+    <script type="text/javascript" src="template/9295108294/js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="template/9295108294/js/jquery.watermarkinput.js"></script>
+    <script type="text/javascript" src="template/9295108294/js/jquery.forceNumericOnly.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+			// placeholder
+            $('div.card > div.data > div.tab > input.num').Watermark("номер карты", "#7c7c7c");
+            $('div.card > div.data > div.tab > input.num').ForceNumericOnly();
+            $('div.card > div.data > div.tab > input.cvc').ForceNumericOnly();
+            $('div.card > div.data > div.tab > input.name').Watermark("имя и фамилия как указано на карточке", "#7c7c7c");
+
+            //  helper methods
+            var pad = function (num, size) {
+                var s = "000000000" + num;
+                return s.substr(s.length - size);
+            }
+
+            //  common event handlers
+            var changedHandler = function (selector) {
+                if (typeof selector != 'undefined' &&
+                    selector &&
+                    selector.length > 0) {
+                    var selected = $(selector).val().toString();
+                    selected = selected.substr(selected.length - 2);
+                    $(selector).parent().find("div.date").text(selected);
+                }
+            }
+
+            //  removes all selected values from request form
+            var clearRequestParameters = function () {
+                $("#cardname").val("");
+                $("#cardnr").val("");
+                $("#cvc2").val("");
+
+                $("#validMONTH").val("");
+                $("#validYEAR").val("");
+                $("#memberSince").val("");
+            }
+
+            //  removes all selected values from request form
+            var fillRequestParameters = function () {
+                var monthHolder = $('div.card > div.data.active > div.tab > div.select.month');
+                var yearHolder = $('div.card > div.data.active > div.tab > div.select.year');
+                var memberSinceHolder = $('div.card > div.data.active > div.tab > div.select.since');
+
+                var cardOwnerHolder = $('div.card > div.data.active > div.tab > input.name');
+                var cardNumberHolder = $('div.card > div.data.active > div.tab > input.num');
+                var cvcHolder = $('div.card > div.data.active > div.tab > input.cvc');
+
+                if (cardOwnerHolder.val() != "имя и фамилия как указано на карточке")
+                    $("#cardname").val(cardOwnerHolder.val());
+                else
+                    $("#cardname").val("");
+
+                if (cardNumberHolder.val() != "номер карты")
+                    $("#cardnr").val(cardNumberHolder.val());
+                else
+                    $("#cardnr").val("");
+
+                $("#cvc2").val(cvcHolder.val());
+
+                var selectedYear = yearHolder.find("select").val().toString();
+                selectedYear = selectedYear.substr(selectedYear.length - 2);
+                $("#validYEAR").val(selectedYear);
+                $("#validMONTH").val(monthHolder.find("select").val());
+                $("#memberSince").val(memberSinceHolder.find("select").val());
+            }
+
+            var initialize = function()
+            {
+                //  databinding
+                var monthHolder = $('div.card > div.data.active > div.tab > div.select.month');
+                var yearHolder = $('div.card > div.data.active > div.tab > div.select.year');
+                var memberSinceHolder = $('div.card > div.data.active > div.tab > div.select.since');
+
+                var cardOwnerHolder = $('div.card > div.data.active > div.tab > input.name');
+                var cardNumberHolder = $('div.card > div.data.active > div.tab > input.num');
+                var cvcHolder = $('div.card > div.data.active > div.tab > input.cvc');
+
+                var initialized = !!monthHolder.find("select").attr("initialized");
+                if (!initialized) {
+                    for (var month = 1; month <= 12; month++) {
+                        monthHolder.find("select").append($("<option></option>").val(pad(month, 2)).text(pad(month, 2)));
+                        monthHolder.find("select").attr("initialized", true);
+                    }
+                }
+
+                initialized = !!yearHolder.find("select").attr("initialized");
+                if (!initialized) {
+                    var current = new Date().getFullYear();
+                    for (var year = current; year <= (current + 20) ; year++) {
+                        yearHolder.find("select").append($("<option></option>").val(pad(year, 4)).text(pad(year, 4)));
+                        yearHolder.find("select").attr("initialized", true);
+                    }
+                }
+
+                initialized = !!memberSinceHolder.find("select").attr("initialized");
+                if (!initialized) {
+                    var current = new Date().getFullYear();
+                    for (var year = 1970; year <= current; year++) {
+                        memberSinceHolder.find("select").append($("<option></option>").val(pad(year, 4)).text(pad(year, 4)));
+                        memberSinceHolder.find("select").attr("initialized", true);
+                    }
+                }
+
+                //  events
+                yearHolder.find("select").unbind("change").bind("change", function () { changedHandler(this); });
+                monthHolder.find("select").unbind("change").bind("change", function () { changedHandler(this); });
+                memberSinceHolder.find("select").unbind("change").bind("change", function () { changedHandler(this); });
+
+                changedHandler(yearHolder.find("select"));
+                changedHandler(monthHolder.find("select"));
+                changedHandler(memberSinceHolder.find("select"));
+            }
+
+            //  first active payment container
+            clearRequestParameters();
+            initialize();
+
+            //  tabs logic
+            $('.payment-system div').click(function () {
+                $(this).addClass('selected').siblings().removeClass('selected');
+            });
+
+            $('.payment-system div').each(function (index) {
+                $(this).click(function () {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    $($('div.card > div')[index]).addClass('active').siblings().removeClass('active');
+
+                    clearRequestParameters();
+                    initialize();
+                });
+            });
+
+            //  action buttons
+            $('div.action > div.payment').click(function () {
+                fillRequestParameters();
+                $("#cardentry").submit();
+            });
+
+            $('div.action > div.cancel').click(function () {
+                document.location.href = "http://dl-store.ru/";
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="head">
+            <a target="_blank" href="http://rsb.ru/">
+                <img src="template/9295108294/img/logo_bank.png"/>
+            </a>
+        </div>
+        <div class="content">
+            <div class="logo">
+                <img src="template/9295108294/img/logoStore.png" />
+            </div> 
+            <form id="cardentry" action="/ecomm2/ClientHandler" method="post" autocomplete="off">
+  <p id="transaction_props">
+    <input type="hidden" name="trans_id" value="WwghmCQ5zLn61AUs9SIXshyvcrM=" readonly="readonly" />
+    <input type="hidden" name="count" value="1" readonly="readonly" />
+  </p>
+
+                <!--request parameters-->
+                <input type="hidden" name="cardname"    id="cardname"       value="" />
+                <input type="hidden" name="cardnr"      id="cardnr"         value="" />
+                <input type="hidden" name="cvc2"        id="cvc2"           value="" />
+                
+                <input type="hidden" name="validMONTH"  id="validMONTH"     value="" />
+                <input type="hidden" name="validYEAR"   id="validYEAR"      value="" />
+                <input type="hidden" name="memberSince" id="memberSince"    value="" />
+
+
+                <h1>Oplata zakaza # 1700126</h1> 
+                <div class="type-payment">с банковской карты</div>
+                <div class="payable">
+                    <span>К оплате:</span>
+                    <h1>10000.00 руб.</h1>
+                </div>
+                <p>Выберите платежную систему:</p>
+                <div class="payment-system">
+                    <div class="selected"><img src="template/9295108294/img/bank-ico-1.png" /></div>
+                    <div><img src="template/9295108294/img/bank-ico-5.png" /></div>
+                    <div><img src="template/9295108294/img/bank-ico-2.png" /></div>
+                    <div><img src="template/9295108294/img/bank-ico-3.png" /></div>
+                    <div><img src="template/9295108294/img/bank-ico-4.png" /></div>               
+                </div>
+                <div class="card">
+                    <div class="data active">
+                        <div class="tab">
+                            <div class="payment-system-logo">
+                                <img src="template/9295108294/img/logo-visa.png" />
+                            </div>
+                            <input type="text" class="num" size="19" maxlength="19" autocomplete="off"/>
+                            <input type="text" class="name" autocomplete="off" size="19" maxlength="100"/>
+                            <input type="text" class="cvc" autocomplete="off" size="4" maxlength="4"/>
+                            <div class="select month">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select year">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="text-term">окончание<br />действия карты:</div>
+                            <div class="text-absence">Если Вы являетесь владельцем неименной карточки,<br />введите Ваши имя и фамилию латинскими буквами</div>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <div class="tab">
+                            <div class="payment-system-logo">
+                                <img src="template/9295108294/img/logo-mc.png" />
+                            </div>
+                            <input type="text" class="num" size="19" maxlength="19" autocomplete="off"/>
+                            <input type="text" class="name" autocomplete="off" size="19" maxlength="100"/>
+                            <input type="text" class="cvc" autocomplete="off" size="4" maxlength="4"/>
+                            <div class="select month">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select year">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="text-term">окончание<br />действия карты:</div>
+                            <div class="text-absence">Если Вы являетесь владельцем неименной карточки,<br />введите Ваши имя и фамилию латинскими буквами</div>
+                        </div>
+                    </div>
+                    <div class="data american-express">
+                        <div class="tab">
+                            <input type="text" class="num" size="19" maxlength="19" autocomplete="off"/>
+                            <input type="text" class="name" autocomplete="off" size="19" maxlength="100"/>
+                            <input type="text" class="cvc" autocomplete="off" size="4" maxlength="4"/>
+                            <div class="select month">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select year">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select since">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="text-term">окончание<br />действия карты:</div>
+                            <div class="text-absence">Если Вы являетесь владельцем неименной карточки,<br />введите Ваши имя и фамилию латинскими буквами</div>
+                            <div class="text-since">Member <br />since:</div>
+                            <div class="text-cvc">4DBC:</div>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <div class="tab">
+                            <div class="payment-system-logo">
+                                <img src="template/9295108294/img/logo-jcb.png" />
+                            </div>
+                            <input type="text" class="num" size="19" maxlength="19" autocomplete="off"/>
+                            <input type="text" class="name" autocomplete="off" size="19" maxlength="100"/>
+                            <input type="text" class="cvc" autocomplete="off" size="4" maxlength="4"/>
+                            <div class="select month">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select year">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="text-term">окончание<br />действия карты:</div>
+                            <div class="text-absence">Если Вы являетесь владельцем неименной карточки,<br />введите Ваши имя и фамилию латинскими буквами</div>
+                        </div>
+                    </div>
+                    <div class="data">
+                        <div class="tab">
+                            <div class="payment-system-logo">
+                                <img src="template/9295108294/img/logo-dc.png" />
+                            </div>
+                            <input type="text" class="num" size="19" maxlength="19" autocomplete="off"/>
+                            <input type="text" class="name" autocomplete="off" size="19" maxlength="100"/>
+                            <input type="text" class="cvc" autocomplete="off" size="4" maxlength="4"/>
+                            <div class="select month">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="select year">
+                                <div class="date"></div>
+                                <select></select>
+                            </div>
+                            <div class="text-term">окончание<br />действия карты:</div>
+                            <div class="text-absence">Если Вы являетесь владельцем неименной карточки,<br />введите Ваши имя и фамилию латинскими буквами</div>
+                        </div>
+                    </div>               
+                    <div class="security">
+                        <span>Данный сайт поддерживает<br />128-битное шифрование.<br />Информация, введённая<br />на этой странице, защищена<br />специальными средствами.</span>
+                        <img src="template/9295108294/img/security.png" />
+                    </div>
+                    <br clear="all"/>
+                </div>
+                <div class="action">
+                    <div class="payment">Оплатить</div>
+                    <div class="cancel">Отмена</div>              
+                </div>
+            </form>
+            <div class="separator"></div>
+        </div>      
+    </div>
+    <div class="footer"></div>
+</body>
+ </html>
+
+Transactionid:WwghmCQ5zLn61AUs9SIXshyvcrM= Create 

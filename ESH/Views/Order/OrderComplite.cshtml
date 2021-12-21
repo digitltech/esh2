@@ -1,0 +1,400 @@
+﻿@model ESH.Models.Order
+@{
+    ViewBag.Title = "OrderComplite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section>
+    <div class="container">
+        
+
+        @switch (Model.PaymentTypeId)
+        {
+            case 1://наличными в
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Информация о заказа</h2>
+                            <h3><b> @Model.Costumer</b>,  Ваш заказ принят!</h3>
+                            <div class="col-md-6">
+                                <p>Номер заказа<b> @Model.NumberOrder</b></p>
+                                <p>Дата <b> @Model.DateCreate</b></p>
+                                <P>Идентификатор<b> @Model.Guet</b></P>
+                                <p>Общая стоимость заказа <span class="label label-danger"> @string.Format("{0:#,#}", Model.TotalSumm) <i class="fa fa-rub" aria-hidden="true"></i>  </span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Статус заказа <span class="label label-success">@Model.StatusOrders.Name</span></p>
+                                <p>Способ оплаты <span class="label label-warning">@Model.PaymentTypes.Name</span></p>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12">
+                                <table class="table table-striped" style="border: 0.5px solid black;">
+                                    <thead>
+                                        <tr>
+                                            <td>Артикул</td>
+                                            <td>Наименование</td>
+                                            <td>Цена</td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td> @item.Products.Article</td>
+                                                <td>@item.Products.Name </td>
+                                                <td> @string.Format("{0:#,#}", item.Products.Price)</td>
+
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <p>Ваш заказ отправлен на обработку, в ближайшие время с Вами свяжется менеджер</p>
+
+                    </div>
+                </div>
+                break;
+            case 2://кредит в магазине
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Информация о заказа</h2>
+                            <h3><b> @Model.Costumer</b>,  Ваш заказ принят!</h3>
+                            <div class="col-md-6">
+                                <p>Номер заказа<b> @Model.NumberOrder</b></p>
+                                <p>Дата <b> @Model.DateCreate</b></p>
+                                <P>Идентификатор<b> @Model.Guet</b></P>
+                                <p>Общая стоимость заказа <span class="label label-danger"> @string.Format("{0:#,#}", Model.TotalSumm) <i class="fa fa-rub" aria-hidden="true"></i>  </span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Статус заказа <span class="label label-success">@Model.StatusOrders.Name</span></p>
+                                <p>Способ оплаты <span class="label label-warning">@Model.PaymentTypes.Name</span></p>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12">
+                                <table class="table table-striped" style="border: 0.5px solid black;">
+                                    <thead>
+                                        <tr>
+                                            <td>Артикул</td>
+                                            <td>Наименование</td>
+                                            <td>Цена</td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td> @item.Products.Article</td>
+                                                <td>@item.Products.Name </td>
+                                                <td> @string.Format("{0:#,#}", item.Products.Price)</td>
+
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <p>Ваш заказ отправлен на обработку, в ближайшие время с Вами свяжется менеджер</p>
+
+                    </div>
+
+                </div>
+                break;
+            case 3://безналичный перевод на р/с
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Информация о заказа</h2>
+                            <h3><b> @Model.Costumer</b>,  Ваш заказ принят!</h3>
+                            <div class="col-md-6">
+                                <p>Номер заказа<b> @Model.NumberOrder</b></p>
+                                <p>Дата <b> @Model.DateCreate</b></p>
+                                <P>Идентификатор<b> @Model.Guet</b></P>
+                                <p>Общая стоимость заказа <span class="label label-danger"> @string.Format("{0:#,#}", Model.TotalSumm) <i class="fa fa-rub" aria-hidden="true"></i>  </span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Статус заказа <span class="label label-success">@Model.StatusOrders.Name</span></p>
+                                <p>Способ оплаты <span class="label label-warning">@Model.PaymentTypes.Name</span></p>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12">
+                                <table class="table table-striped" style="border: 0.5px solid black;">
+                                    <thead>
+                                        <tr>
+                                            <td>Артикул</td>
+                                            <td>Наименование</td>
+                                            <td>Цена</td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td> @item.Products.Article</td>
+                                                <td>@item.Products.Name </td>
+                                                <td> @string.Format("{0:#,#}", item.Products.Price)</td>
+
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <p>Ваш заказ отправлен на обработку, в ближайшие время с Вами свяжется менеджер</p>
+
+                    </div>
+                </div>
+                break;
+            case 4://оплата онлайн
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Информация о заказа</h2>
+                            <h3><b> @Model.Costumer</b>,  Ваш заказ принят!</h3>
+                            <div class="col-md-6">
+                                <p>Номер заказа<b> @Model.NumberOrder</b></p>
+                                <p>Дата <b> @Model.DateCreate</b></p>
+                                <P>Идентификатор<b> @Model.Guet</b></P>
+                                <p>Стоимость доставки <b>  @Model.ShippingSumm р.</b></p>
+                                <p>Общая стоимость заказа <span class="label label-danger"> @string.Format("{0:#,#}", Model.TotalSumm) <i class="fa fa-rub" aria-hidden="true"></i>  </span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p >Статус заказа <span class="label label-success">@Model.StatusOrders.Name</span></p>
+                                <p>Способ оплаты <span class="label label-warning">@Model.PaymentTypes.Name</span></p>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12">
+                                <table class="table table-striped" style="border: 0.5px solid black;">
+                                    <thead>
+                                        <tr>
+                                            <td>Артикул</td>
+                                            <td>Наименование</td>
+                                            <td>Цена</td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td> @item.Products.Article</td>
+                                                <td>@item.Products.Name </td>
+                                                <td> @string.Format("{0:#,#}", item.Products.Price)</td>
+
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                       
+                        @if (Model.PayOnline == true)
+                        {
+                            if (Model.StatusOrderId != 4) { 
+                            using (Html.BeginForm("PayOrder", "Order", new { guid = Model.Guet }, FormMethod.Post))
+                            {
+                        <div class="col-md-2" style="padding-top:30px;">Оплатить картой </div>
+                        <div class="col-md-9"><img src="~/images/2234_sberbank-image.jpg" width="280" /></div>
+                        <div class="col-md-3">
+                            <img src="~/images/visa_mastercard.png" />
+                           <a href="~//Home/About#cart" target="_blank"style="font-size:10px;">подробнее описание оплаты</a> 
+                        </div>
+                        
+                        <div class="col-md-10" style="padding:20px 0">
+                            <input type="submit" value="Перейти к оплате:  @String.Format("{0:#,#}", Model.TotalSumm) руб." class="btn btn-success" />
+                            <p style="padding:15px"><a href="#" style="font-size:10px;">другой способ оплаты</a></p>
+                        </div>
+                                         
+
+
+
+
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            <p>Ваш заказ принят, ожидается проверка наличии на складе. это займен до 15 мин.</p>
+                        }
+
+                    </div>
+
+                </div>
+                break;
+            case 5://онлайн кредит
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="blog-post-area">
+                            <h2 class="title text-center">Информация о заказа</h2>
+                            <h3><b> @Model.Costumer</b>,  Ваш заказ принят!</h3>
+                            <div class="col-md-6">
+                                <p>Номер заказа<b> @Model.NumberOrder</b></p>
+                                <p>Дата <b> @Model.DateCreate</b></p>
+                                <P>Идентификатор<b> @Model.Guet</b></P>
+                                <p>Общая стоимость заказа <span class="label label-danger"> @string.Format("{0:#,#}", Model.TotalSumm) <i class="fa fa-rub" aria-hidden="true"></i>  </span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Статус заказа <span class="label label-success">@Model.StatusOrders.Name</span></p>
+                                <p>Способ оплаты <span class="label label-warning">@Model.PaymentTypes.Name</span></p>
+                            </div>
+
+
+
+
+
+                            <div class="col-md-12">
+                                <table class="table table-striped" style="border: 0.5px solid black;">
+                                    <thead>
+                                        <tr>
+                                            <td>Артикул</td>
+                                            <td>Наименование</td>
+                                            <td>Цена</td>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td> @item.Products.Article</td>
+                                                <td>@item.Products.Name </td>
+                                                <td> @string.Format("{0:#,#}", item.Products.Price)</td>
+
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                  @if (Model.PayOnline == true)
+                  {
+                      if (Model.StatusOrderId != 4)
+                      {
+                          using (Html.BeginForm("CreditRSB", "Order", new { guid = Model.Guet }, FormMethod.Post))
+                          {
+
+                              <div class="col-md-5">
+                                  <h3>Предварительный калькулятор</h3>
+                                  
+                                  <div class="col-lg-6">Срок кредитования</div>
+                                  <div class="col-lg-2">
+                                  <select>
+                                      <option id="1" value="6">6</option>
+                                      <option id="2" value="10">10</option>
+                                      <option id="3" value="12">12</option>
+                                      <option id="4" value="24">24</option>
+                                       </select></div>
+                                  <div class="col-lg-6">Первоначальный взнос</div>
+                                  <div class="col-lg-2"><input type="number" id="pervznos" name="pervznos" value="0" /></div>
+                                  <div class="col-lg-6">Стоимость покупки</div>
+                                  <div class="col-lg-2"><input type="number" value="@Model.TotalSumm"/></div>
+                                  <div class="col-lg-6">Ежемесячный платеж</div>
+                                  <div class="col-lg-2"><span id="Total">@ViewData["platezh"]</span></div>
+                                  <div class="col-lg-6">
+                                      <input type="submit" class="credtiOnline_but" value=" " />
+                                  </div>
+                              </div>
+                        
+
+
+
+
+
+                          }
+
+                      }
+                   
+                  }
+
+                  else
+                  {
+                            <p>Ваш заказ принят, ожидается проверка наличии на складе. это займен до 15 мин.</p>
+                        }
+
+                    </div>
+                </div>
+                break;
+        }
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $('#getNetlab').on('click', function (e) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Get_Credit_ForOrder","Order", null)',
+            contentType: false,
+            processData: false,
+            data: ,
+            success: function (result) {
+                alert(result);
+            },
+            error: function (xhr, status, p3) {
+                alert(xhr.responseText);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,402 @@
+﻿body {
+    background:rgb(255, 255, 255) !important;
+    color:rgb(28, 28, 28);
+    font-family:"MuseoSansCyrl-500", Arial, helvetica, sans-serif;
+    font-size:14pt;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    padding:0px;
+    margin:0px;
+    border:0px currentColor;
+    width:100%;
+    height:100%;
+}
+
+
+.page-wrapper{
+    overflow:hidden;
+    position:relative;
+    background-color:rgb(255, 255, 255);
+}
+
+header{
+    height:180px;
+    z-index:10;
+    background-color:rgb(255, 255, 255);
+}
+.top_line{
+    height:35px;
+    color:rgb(77, 77, 77);
+    text-transform:uppercase;
+    line-height:35px;
+    font-size:11pt;
+    border-bottom-color:rgb(236, 236, 236);
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+}
+.content_top_line{
+    margin:0px auto;
+    width:980px;
+}
+.top-line-links{
+    float:right;
+}
+.top-line-links ins{
+    margin:0px;
+    padding:0px;
+    border:0px currentColor;
+    border-image:none;
+    text-decoration:none;
+    vertical-align:baseline;
+    font-size-adjust:inherit;
+    font-stretch:inherit;
+}
+.top-line-links ins a {
+    color:rgb(28,28,28);
+    margin-left:25px;
+    display:inline-block;
+    font-size:10px;
+}
+
+.clear{
+    clear:both;
+    float:none!important;
+    display:block
+}
+
+.head{
+    padding:10px 0px;
+    height:70px;
+}
+.content_head{
+    margin:0px auto;
+    width:980px;
+}
+.head_logo{
+    margin:0px 15px 0px 12px;
+    width:235px;
+    vertical-align:middle;
+    display:inline-block;
+}
+.head_logo span{
+    height:73px;
+    text-align:center;
+    line-height:73px;
+    display:block;
+}
+.head_logo span img{
+    width:300px;
+}
+.header-links{
+    left:40%;
+    bottom:29px;
+    font-size:0px;
+    position:relative;
+}
+.header-links a{
+    padding:0px 20px;
+    color:rgb(28, 28, 28);
+    text-transform:uppercase;
+    font-size:12pt;
+    display:inline-block;
+}
+.phone-num-area{
+    text-align:right;
+    color:rgb(28, 28, 28);
+    line-height:normal;
+    font-family:"MuseoSansCyrl-700", sans-serif;
+    margin-top:14px;
+    float:right;
+    position:relative;
+    bottom:59px
+}
+
+.phone-num-area p {
+    text-transform:uppercase;
+    font-size:11px;
+    vertical-align:top;
+}
+.phone-num-area a{
+    color:rgb(28, 28, 28);
+    line-height:1.2;
+    font-size:24px;
+    position:relative;
+}
+.head_bottom{
+    height:54px;
+    margin-top:40px;
+    background-color:black;
+
+}
+.head_bottom_cont{
+    margin:0px auto;
+    width:980px;
+}
+.main-categories{
+    left:0px;
+    top:100%;
+    right:0px;
+    position:absolute;
+    z-index:10001;
+}
+
+.catalog_a  {
+    color:rgb(255, 255, 255);
+   text-decoration: none;
+}
+
+.catalog_a:hover  {
+    color:rgb(255, 255, 255);
+   text-decoration: none;
+}
+.content{
+    margin-top:250px;
+}
+.block-popular{
+    width:95%;
+    margin:auto;
+    padding:10px;
+    position:relative;
+    border:2px solid rgb(82, 128, 178);
+    border-image:none;
+ 
+}
+.block-title-wrapper{
+    top:-11px;
+    left:0px;
+    text-align:center;
+    right:0px;
+    text-transform:uppercase;
+    position:absolute;
+}
+.block-title{
+    background:rgb(255, 255, 255);
+    margin:0px;
+    padding:0px 18px;
+    font-size:20px;
+    font-weight:700;
+    vertical-align:top;
+    display:inline-block;
+    position:relative;
+}
+
+.slider-wrapper{
+    overflow:hidden;
+    min-height:442px;
+}
+.product-list{
+    margin:0px 0px 0px 12px;
+    padding:10px;
+    width:23%;
+    float:left;
+    display:block;
+}
+.product-list-item{
+    padding:20px;
+    border-radius:0px;
+    border:1px solid rgb(238, 238, 238);
+    border-image:none;
+    position:relative;
+    box-shadow:none;
+    background-color:rgb(255, 255, 255);
+}
+.product-list-item-image{
+    height:180px;
+    text-align:center;
+    line-height:180px;
+    overflow:hidden;
+    padding-bottom:10px;
+}
+.product-list-item-image a img{
+    height:130px;
+   
+}
+.product-list-item-title .name{
+    margin:5px 0px;
+    color:black;
+    line-height:1.2em;
+    overflow:hidden;
+    font-size:12pt;
+    text-decoration:none;
+    display:block;
+    position:relative;
+}
+.product-list-item-title .description{
+    margin:5px 0px;
+    color:black;
+    line-height:1.2em;
+    overflow:hidden;
+    font-size:10pt;
+    text-decoration:none;
+    display:block;
+    position:relative;
+}
+.product-list-item-bottom{
+
+}
+.product-list-item-bottom .price{
+    font-size:24px;
+    font-family:"MuseoSansCyrl-900",sans-serif;
+    display:block;
+    width:50%;
+    float:left;
+    padding:10px;
+
+}
+.product-list-item-bottom .addCart{
+    background:black;
+    color:rgb(255, 255, 255);
+    padding:10px;
+        display:block;
+    width:50%;
+    float:left;
+    border:currentColor;
+    border-image:none;
+    width:auto;
+    text-align:center;
+    font-size:12pt;
+    vertical-align:top;
+    display:inline-block;
+    cursor:pointer;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+}
+
+.sticker-holder{
+    padding-top:20px;
+    padding-left:20px;
+    left:0px;
+    top:0px;
+    left:0px;
+    overflow:visible;
+    position:absolute;
+    z-index:5;
+
+}
+.sticker{
+    padding:3px 5px 2px;
+    font-size:12px;
+    background-color:rgb(255, 0, 30)
+}
+.sticker span{
+    text-transform:uppercase;
+    white-space:nowrap;
+    color:rgb(255, 255, 255);
+    font-family:"MuseoSansCyrl-900",sans-serif;
+    font-size:11px;
+    display:block;
+}
+.list-nav__link {
+	border: 0px currentColor; border-image: none; color: rgb(82, 128, 178); text-decoration: none;
+}
+.list-nav__link:hover {
+	color: rgb(204, 0, 0); text-decoration: none;
+}
+.list-nav__link--empty {
+	color: rgb(102, 102, 102) !important; text-decoration: none; cursor: default; pointer-events: none;
+}
+.list-nav__link--empty:hover {
+	color: rgb(102, 102, 102) !important; text-decoration: none; cursor: default; pointer-events: none;
+}
+.list-nav__item--active .list-nav__link {
+	color: rgb(204, 0, 0);
+}
+.list-nav__item:hover .list-nav__link {
+	color: rgb(204, 0, 0);
+}
+.list-nav__item--active .list-nav__icon {
+	fill: #c00;
+}
+.list-nav__item:hover .list-nav__icon {
+	fill: #c00;
+}
+.list-nav__drop {
+	left: 0px; top: 100%; display: none; position: absolute; z-index: 1000;
+}
+.list-nav__drop--rtl {
+	left: auto; right: 0px;
+}
+.list-nav__item:hover .list-nav__drop {
+	display: block;
+}
+.tree-nav {
+	background: rgb(255, 255, 255); border: 1px solid rgb(199, 199, 199); border-image: none; text-align: left; position: relative;
+}
+.tree-nav__item {
+	border-top-color: rgb(199, 199, 199); border-top-width: 1px; border-top-style: solid; position: relative;  list-style:none;
+}
+:first-child.tree-nav__item {
+	border-top-color: currentColor; border-top-width: 0px; border-top-style: none;list-style:none;
+}
+.tree-nav__item:hover {
+	
+
+
+}
+.tree-nav__item:hover > .tree-nav__drop {
+	margin-top: -1px; display: block;
+}
+.tree-nav__item--top-drop {
+	position: static;
+}
+.tree-nav__link {
+	padding: 10px 30px 10px 10px; color: rgb(0, 0, 0); text-decoration: none; display: block; white-space: nowrap; position: relative;
+}
+.tree-nav__ico {
+	margin-top: -1px; margin-right: 4px; float: left;
+}
+.tree-nav__arrow {
+	right: 5px; position: absolute;
+}
+.tree-nav__drop {
+	left: 100%; top: 0px; display: none; position: absolute;
+}
+.table-nav {
+	position: relative;
+}
+.table-nav__item {
+	position: relative;
+}
+.tree-nav__drop--rtl {
+	left: auto; right: 100%;
+}
+.table-nav--equal .table-nav__items {
+	table-layout: fixed;
+}
+.table-nav__items {
+	width: 100%; height: 45px; display: table;
+}
+.table-nav__item {
+	height: 100%; text-align: center; border-left-color: rgb(61, 59, 59); border-left-width: 1px; border-left-style: solid; display: table-cell; background-color: rgb(0, 0, 0);
+}
+:first-child.table-nav__item {
+	border-left-color: currentColor; border-left-width: 0px; border-left-style: none;
+}
+.table-nav__item:hover .table-nav__link {
+	background: rgb(51, 51, 51); color: rgb(255, 255, 255);
+}
+.table-nav__item:hover .table-nav__drop {
+	display: block;
+}
+.table-nav__item--active .table-nav__link {
+	background-color: gray;
+}
+.table-nav__item--wide-drop {
+	position: static;
+}
+.table-nav__link {
+	height: 100%; color: rgb(255, 255, 255); font-size: 0px; text-decoration: none; display: block;
+}
+.table-nav__link::before {
+	padding: 10px 0px; height: 100%; display: inline-block; content: "";
+}
+.table-nav__link-helper {
+	padding: 5px; font-size: 1rem; display: inline-block;
+}
+.table-nav__drop {
+	left: 0px; top: 100%; display: none; position: absolute; z-index: 1000;
+}
+.table-nav__drop--rtl {
+	left: auto; right: 0px;
+}
